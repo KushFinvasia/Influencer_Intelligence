@@ -138,6 +138,10 @@ class DiscoveryPipeline:
                         stats["new"] += 1
                     else:
                         stats["rejected"] += 1
+                    
+                    # Commit every 10 creators so progress is immediately saved to disk
+                    if (stats["new"] + stats["rejected"]) % 10 == 0:
+                        await db.commit()
                 except Exception as e:
                     logger.error(
                         "Error processing profile %s: %s",
