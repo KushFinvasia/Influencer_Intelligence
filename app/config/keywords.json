@@ -1,0 +1,205 @@
+{
+  "youtube": {
+    "generic_keywords": [
+      "stock market india",
+      "share market investing india",
+      "stock market analysis india",
+      "stock market for beginners india",
+      "stock market education india",
+      "indian stock market analysis",
+      "equity investing india",
+      "stock picking india",
+
+      "options trading india",
+      "options trading strategy india",
+      "futures trading india",
+      "F&O trading india",
+      "F&O trading live",
+      "option chain analysis",
+      "nifty options trading",
+      "banknifty options trading",
+      "intraday trading india",
+      "swing trading india",
+      "price action trading india",
+
+      "technical analysis stock market",
+      "technical analysis india",
+      "fundamental analysis stocks india",
+      "stock analysis india",
+      "multibagger stocks india",
+      "smallcap stocks india",
+      "midcap stocks india",
+      "dividend stocks india",
+      "value investing india",
+      "stock screener india",
+
+      "IPO analysis india",
+      "IPO review india",
+      "IPO investing india",
+      "mutual funds india",
+      "mutual funds SIP india",
+      "SIP investing india",
+      "index funds india",
+      "ELSS mutual funds india",
+      "personal finance india",
+      "investment planning india",
+
+      "algo trading india",
+      "algo trading python india",
+      "trading strategy india",
+      "candlestick patterns trading",
+      "chart patterns trading",
+      "nifty analysis",
+      "banknifty analysis",
+      "sensex analysis",
+
+      "finfluencer india",
+      "stock market educator india",
+      "trading educator india",
+      "stock market mentor india"
+    ],
+
+    "language_keywords": [
+      "stock market hindi",
+      "share market hindi",
+      "stock market tamil",
+      "share market tamil",
+      "stock market telugu",
+      "share market telugu",
+      "stock market kannada",
+      "share market kannada",
+      "stock market malayalam",
+      "share market malayalam",
+      "stock market marathi",
+      "share market marathi"
+    ],
+
+    "broker_keywords": [
+      "zerodha trading tutorial",
+      "zerodha kite tutorial",
+      "groww trading tutorial",
+      "groww demat account",
+      "angel one trading tutorial",
+      "angel one app tutorial",
+      "upstox trading tutorial",
+      "dhan trading tutorial",
+      "dhan options trading",
+      "fyers trading tutorial"
+    ]
+  },
+
+  "instagram": {
+    "generic_hashtags": [
+      "#stockmarketindia",
+      "#indianstockmarket",
+      "#sharemarketindia",
+      "#stockmarket",
+      "#stockmarkettrading",
+      "#stockmarketanalysis",
+      "#stockmarketeducation",
+      "#equityinvesting",
+      "#equityinvestment",
+      "#stockinvestingindia",
+      "#stockpicking",
+
+      "#optionstrading",
+      "#optionstradingindia",
+      "#fno",
+      "#fnobasics",
+      "#nifty50",
+      "#niftytrading",
+      "#banknifty",
+      "#bankniftytrading",
+      "#intradaytrading",
+      "#intradaytradingindia",
+      "#swingtrading",
+      "#swingtradingindia",
+      "#priceactiontrading",
+      "#priceactiontrading",
+
+      "#technicalanalysis",
+      "#technicalanalysisindia",
+      "#fundamentalanalysis",
+      "#fundamentalanalysisindia",
+      "#stockanalysis",
+      "#stockanalysisindia",
+      "#chartpatterns",
+      "#candlestickpatterns",
+      "#stockscreener",
+
+      "#multibaggerstocks",
+      "#smallcapstocks",
+      "#midcapstocks",
+      "#dividendstocks",
+      "#dividendinvesting",
+      "#valueinvestingindia",
+
+      "#ipoindia",
+      "#ipoanalysis",
+      "#ipoinvesting",
+
+      "#mutualfundsindia",
+      "#mutualfundinvesting",
+      "#sipindia",
+      "#sipinvesting",
+      "#indexfundsindia",
+      "#elss",
+
+      "#algotrading",
+      "#algotradingindia",
+      "#tradingstrategy",
+      "#tradingstrategies",
+
+      "#finfluencer",
+      "#finfluencersindia",
+      "#stockmarketeducator",
+      "#tradingeducator",
+      "#stockmarketeducation",
+      "#tradingeducation"
+    ],
+
+    "language_hashtags": [
+      "#stockmarkethindi",
+      "#sharemarkethindi",
+      "#hindistockmarket",
+      "#hinditrading",
+
+      "#stockmarkettamil",
+      "#sharemarkettamil",
+      "#tamilstockmarket",
+      "#tamiltrading",
+
+      "#stockmarkettelugu",
+      "#sharemarkettelugu",
+      "#telugustockmarket",
+      "#telugutrading",
+
+      "#stockmarketkannada",
+      "#sharemarketkannada",
+      "#kannadastockmarket",
+      "#kannadatrading",
+
+      "#stockmarketmalayalam",
+      "#sharemarketmalayalam",
+      "#malayalamstockmarket",
+
+      "#stockmarketmarathi",
+      "#sharemarketmarathi",
+      "#marathistockmarket"
+    ],
+
+    "broker_hashtags": [
+      "#zerodha",
+      "#zerodhakite",
+      "#groww",
+      "#growwapp",
+      "#angelone",
+      "#upstox",
+      "#dhan",
+      "#dhanhq",
+      "#fyers"
+    ],
+
+    "seed_usernames": []
+  }
+}

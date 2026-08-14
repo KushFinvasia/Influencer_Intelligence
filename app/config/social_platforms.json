@@ -1,0 +1,94 @@
+{
+  "platforms": [
+    {
+      "name": "YouTube",
+      "key": "youtube",
+      "url_patterns": [
+        "youtube.com/channel/",
+        "youtube.com/c/",
+        "youtube.com/@",
+        "youtu.be/"
+      ]
+    },
+    {
+      "name": "Instagram",
+      "key": "instagram",
+      "url_patterns": [
+        "instagram.com/",
+        "instagr.am/"
+      ]
+    },
+    {
+      "name": "Telegram",
+      "key": "telegram",
+      "url_patterns": [
+        "t.me/",
+        "telegram.me/"
+      ]
+    },
+    {
+      "name": "WhatsApp",
+      "key": "whatsapp",
+      "url_patterns": [
+        "wa.me/",
+        "chat.whatsapp.com/",
+        "api.whatsapp.com/",
+        "whatsapp.com/"
+      ]
+    },
+    {
+      "name": "LinkedIn",
+      "key": "linkedin",
+      "url_patterns": [
+        "linkedin.com/in/",
+        "linkedin.com/company/"
+      ]
+    },
+    {
+      "name": "X",
+      "key": "twitter",
+      "url_patterns": [
+        "x.com/",
+        "twitter.com/"
+      ]
+    },
+    {
+      "name": "Facebook",
+      "key": "facebook",
+      "url_patterns": [
+        "facebook.com/",
+        "fb.com/",
+        "fb.me/"
+      ]
+    },
+    {
+      "name": "Discord",
+      "key": "discord",
+      "url_patterns": [
+        "discord.gg/",
+        "discord.com/invite/"
+      ]
+    },
+    {
+      "name": "Linktree",
+      "key": "linktree",
+      "url_patterns": [
+        "linktr.ee/"
+      ]
+    },
+    {
+      "name": "Beacons",
+      "key": "beacons",
+      "url_patterns": [
+        "beacons.ai/"
+      ]
+    },
+    {
+      "name": "Carrd",
+      "key": "carrd",
+      "url_patterns": [
+        ".carrd.co"
+      ]
+    }
+  ]
+}

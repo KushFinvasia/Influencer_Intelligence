@@ -1,0 +1,94 @@
+{
+  "regions": [
+    {
+      "state": "Maharashtra",
+      "cities": ["Mumbai", "Pune", "Nagpur", "Nashik"],
+      "region": "West"
+    },
+    {
+      "state": "Delhi",
+      "cities": ["New Delhi", "Delhi NCR"],
+      "region": "North"
+    },
+    {
+      "state": "Karnataka",
+      "cities": ["Bangalore", "Bengaluru", "Mysore"],
+      "region": "South"
+    },
+    {
+      "state": "Tamil Nadu",
+      "cities": ["Chennai", "Coimbatore", "Madurai"],
+      "region": "South"
+    },
+    {
+      "state": "Telangana",
+      "cities": ["Hyderabad", "Secunderabad"],
+      "region": "South"
+    },
+    {
+      "state": "Gujarat",
+      "cities": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+      "region": "West"
+    },
+    {
+      "state": "West Bengal",
+      "cities": ["Kolkata", "Howrah"],
+      "region": "East"
+    },
+    {
+      "state": "Uttar Pradesh",
+      "cities": ["Lucknow", "Noida", "Gurgaon", "Ghaziabad"],
+      "region": "North"
+    },
+    {
+      "state": "Rajasthan",
+      "cities": ["Jaipur", "Jodhpur", "Udaipur"],
+      "region": "North"
+    },
+    {
+      "state": "Kerala",
+      "cities": ["Kochi", "Thiruvananthapuram", "Kozhikode"],
+      "region": "South"
+    },
+    {
+      "state": "Punjab",
+      "cities": ["Chandigarh", "Ludhiana", "Amritsar"],
+      "region": "North"
+    },
+    {
+      "state": "Haryana",
+      "cities": ["Gurugram", "Faridabad"],
+      "region": "North"
+    },
+    {
+      "state": "Madhya Pradesh",
+      "cities": ["Indore", "Bhopal"],
+      "region": "Central"
+    },
+    {
+      "state": "Andhra Pradesh",
+      "cities": ["Visakhapatnam", "Vijayawada"],
+      "region": "South"
+    },
+    {
+      "state": "Bihar",
+      "cities": ["Patna"],
+      "region": "East"
+    },
+    {
+      "state": "Odisha",
+      "cities": ["Bhubaneswar"],
+      "region": "East"
+    },
+    {
+      "state": "Assam",
+      "cities": ["Guwahati"],
+      "region": "Northeast"
+    },
+    {
+      "state": "Goa",
+      "cities": ["Panaji"],
+      "region": "West"
+    }
+  ]
+}

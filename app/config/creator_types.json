@@ -1,0 +1,39 @@
+{
+  "creator_types": [
+    "Educator",
+    "Trader",
+    "Investor",
+    "Analyst",
+    "News",
+    "Personal Finance",
+    "Broker Representative",
+    "Influencer",
+    "Community Builder"
+  ],
+  "aliases": {
+    "Teacher": "Educator",
+    "Coach": "Educator",
+    "Mentor": "Educator",
+    "Tutor": "Educator",
+    "Day Trader": "Trader",
+    "Swing Trader": "Trader",
+    "Options Trader": "Trader",
+    "Full Time Trader": "Trader",
+    "Stock Analyst": "Analyst",
+    "Market Analyst": "Analyst",
+    "Research Analyst": "Analyst",
+    "Technical Analyst": "Analyst",
+    "Fundamental Analyst": "Analyst",
+    "Reporter": "News",
+    "Journalist": "News",
+    "Financial Advisor": "Personal Finance",
+    "CFP": "Personal Finance",
+    "Financial Planner": "Personal Finance",
+    "Sub Broker": "Broker Representative",
+    "AP": "Broker Representative",
+    "Authorized Person": "Broker Representative",
+    "Brand Ambassador": "Broker Representative",
+    "Finfluencer": "Influencer",
+    "Content Creator": "Influencer"
+  }
+}

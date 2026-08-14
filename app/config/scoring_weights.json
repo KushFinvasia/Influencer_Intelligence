@@ -1,0 +1,41 @@
+{
+  "weights": {
+    "followers": 0.20,
+    "avg_views": 0.15,
+    "engagement_rate": 0.15,
+    "posting_frequency": 0.10,
+    "broker_association": 0.10,
+    "contact_availability": 0.10,
+    "verified": 0.05,
+    "recency": 0.10,
+    "content_relevance": 0.05
+  },
+  "follower_thresholds": {
+    "min_score_at": 1000,
+    "mid_score_at": 100000,
+    "max_score_at": 5000000
+  },
+  "engagement_benchmarks": {
+    "youtube": {
+      "excellent": 5.0,
+      "good": 3.0,
+      "average": 1.5,
+      "poor": 0.5
+    },
+    "instagram": {
+      "excellent": 6.0,
+      "good": 3.5,
+      "average": 2.0,
+      "poor": 0.8
+    }
+  },
+  "recency_decay_days": 90,
+  "contact_scores": {
+    "email": 0.35,
+    "phone": 0.25,
+    "website": 0.15,
+    "telegram": 0.10,
+    "linkedin": 0.10,
+    "whatsapp": 0.05
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "languages": [
+    "Hindi",
+    "English",
+    "Tamil",
+    "Telugu",
+    "Kannada",
+    "Malayalam",
+    "Gujarati",
+    "Marathi",
+    "Punjabi",
+    "Bengali",
+    "Odia",
+    "Assamese",
+    "Urdu",
+    "Mixed"
+  ],
+  "aliases": {
+    "हिन्दी": "Hindi",
+    "हिंदी": "Hindi",
+    "Hinglish": "Mixed",
+    "தமிழ்": "Tamil",
+    "తెలుగు": "Telugu",
+    "ಕನ್ನಡ": "Kannada",
+    "മലയാളം": "Malayalam",
+    "ગુજરાતી": "Gujarati",
+    "मराठी": "Marathi",
+    "ਪੰਜਾਬੀ": "Punjabi",
+    "বাংলা": "Bengali",
+    "ଓଡ଼ିଆ": "Odia",
+    "অসমীয়া": "Assamese",
+    "اردو": "Urdu"
+  }
+}

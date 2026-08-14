@@ -1,0 +1,1608 @@
+{
+  "brokers": [
+    {
+      "name": "Zerodha",
+      "aliases": [
+        "zerodha",
+        "kite",
+        "kite by zerodha",
+        "coin by zerodha",
+        "zero1 by zerodha"
+      ],
+      "domains": [
+        "zerodha.com",
+        "kite.zerodha.com",
+        "coin.zerodha.com"
+      ],
+      "referral_patterns": [
+        "zerodha.com/open-account",
+        "zerodha.com/refer",
+        "ref="
+      ]
+    },
+    {
+      "name": "Groww",
+      "aliases": [
+        "groww",
+        "groww app"
+      ],
+      "domains": [
+        "groww.in"
+      ],
+      "referral_patterns": [
+        "groww.in/refer",
+        "groww.app.link"
+      ]
+    },
+    {
+      "name": "Angel One",
+      "aliases": [
+        "angel one",
+        "angel broking",
+        "angelone"
+      ],
+      "domains": [
+        "angelone.in",
+        "angelbroking.com"
+      ],
+      "referral_patterns": [
+        "angelone.in/open-demat",
+        "angelone.in/refer",
+        "angel-one.onelink.me"
+      ]
+    },
+    {
+      "name": "Upstox",
+      "aliases": [
+        "upstox",
+        "upstox pro",
+        "rksv"
+      ],
+      "domains": [
+        "upstox.com"
+      ],
+      "referral_patterns": [
+        "upstox.com/open-account",
+        "upstox.com/refer",
+        "upstox.app.link"
+      ]
+    },
+    {
+      "name": "Dhan",
+      "aliases": [
+        "dhan",
+        "dhan app",
+        "dhan hq",
+        "raise financial"
+      ],
+      "domains": [
+        "dhan.co",
+        "invite.dhan.co"
+      ],
+      "referral_patterns": [
+        "dhan.co/refer",
+        "dhan.co/open-account",
+        "invite.dhan.co"
+      ]
+    },
+    {
+      "name": "Finvasia (Shoonya)",
+      "aliases": [
+        "finvasia (shoonya)",
+        "shoonya",
+        "finvasia",
+        "shoonya by finvasia",
+        "finvasia v3",
+        "finvasia v4"
+      ],
+      "domains": [
+        "shoonya.com",
+        "finvasia.com"
+      ],
+      "referral_patterns": [
+        "shoonya.com/open-account",
+        "shoonya.com/refer",
+        "finvasia.com/open-account"
+      ]
+    },
+    {
+      "name": "FlatTrade",
+      "aliases": [
+        "flattrade",
+        "flattrade v2",
+        "fortune trading",
+        "flat trade"
+      ],
+      "domains": [
+        "flattrade.in",
+        "openaccount.flattrade.in"
+      ],
+      "referral_patterns": [
+        "flattrade.in/open-account",
+        "flattrade.in/refer",
+        "openaccount.flattrade.in"
+      ]
+    },
+    {
+      "name": "IIFL Securities",
+      "aliases": [
+        "iifl (symphony)",
+        "iifl capital",
+        "iifl capital wl",
+        "iifl cdc",
+        "iifl capital uat",
+        "iifl capital mcx",
+        "iifl",
+        "iifl securities",
+        "india infoline"
+      ],
+      "domains": [
+        "iiflsecurities.com",
+        "indiainfoline.com",
+        "iiflcapital.com"
+      ],
+      "referral_patterns": [
+        "iiflsecurities.com/open-account",
+        "indiainfoline.com/refer"
+      ]
+    },
+    {
+      "name": "Kotak Neo",
+      "aliases": [
+        "kotakneo v3",
+        "kotak securities (neoapi)",
+        "kotakneo v2",
+        "kotakneo-yotta-test v3",
+        "kotak neo",
+        "kotak securities",
+        "kotak"
+      ],
+      "domains": [
+        "kotaksecurities.com",
+        "neo.kotaksecurities.com"
+      ],
+      "referral_patterns": [
+        "kotaksecurities.com/open-account",
+        "neo.kotaksecurities.com"
+      ]
+    },
+    {
+      "name": "5Paisa",
+      "aliases": [
+        "5paisa (symphony)",
+        "5paisa (openapi)",
+        "5 paisa (xstream)",
+        "5paisa",
+        "5 paisa",
+        "five paisa"
+      ],
+      "domains": [
+        "5paisa.com"
+      ],
+      "referral_patterns": [
+        "5paisa.com/open-account",
+        "5paisa.com/refer",
+        "5paisa.page.link"
+      ]
+    },
+    {
+      "name": "FYERS",
+      "aliases": [
+        "fyers",
+        "fyers one",
+        "fyers app",
+        "fyers web"
+      ],
+      "domains": [
+        "fyers.in",
+        "open-account.fyers.in"
+      ],
+      "referral_patterns": [
+        "fyers.in/open-account",
+        "fyers.in/refer",
+        "open-account.fyers.in"
+      ]
+    },
+    {
+      "name": "Alice Blue",
+      "aliases": [
+        "aliceblue (v2)",
+        "aliceblue (v3)",
+        "alice blue",
+        "aliceblue",
+        "ant plus",
+        "alice blue ant"
+      ],
+      "domains": [
+        "aliceblueonline.com",
+        "app.aliceblueonline.com"
+      ],
+      "referral_patterns": [
+        "aliceblueonline.com/open-account",
+        "aliceblueonline.com/refer"
+      ]
+    },
+    {
+      "name": "MIRAE ASSET Sharekhan",
+      "aliases": [
+        "mirae asset sharekhan (openapi)",
+        "mirae asset sharekhan v3",
+        "mirae asset sharekhan",
+        "mirae asset sharekhan uat v3",
+        "sharekhan",
+        "share khan"
+      ],
+      "domains": [
+        "sharekhan.com",
+        "miraeasset.co.in"
+      ],
+      "referral_patterns": [
+        "sharekhan.com/open-account",
+        "sharekhan.com/refer"
+      ]
+    },
+    {
+      "name": "m.Stock",
+      "aliases": [
+        "mstock",
+        "m.stock",
+        "m stock",
+        "mirae asset mstock"
+      ],
+      "domains": [
+        "mstock.com"
+      ],
+      "referral_patterns": [
+        "mstock.com/open-account",
+        "mstock.com/refer"
+      ]
+    },
+    {
+      "name": "Motilal Oswal",
+      "aliases": [
+        "motilal oswal (symphony)",
+        "motilal oswal",
+        "motilal",
+        "mo investor",
+        "mo trader"
+      ],
+      "domains": [
+        "motilaloswal.com"
+      ],
+      "referral_patterns": [
+        "motilaloswal.com/open-account",
+        "motilaloswal.com/refer"
+      ]
+    },
+    {
+      "name": "Nuvama Wealth",
+      "aliases": [
+        "nuvama wealth",
+        "nuvama",
+        "edelweiss",
+        "edelweiss broking"
+      ],
+      "domains": [
+        "nuvamawealth.com",
+        "nuvama.com",
+        "edelweiss.in"
+      ],
+      "referral_patterns": [
+        "nuvamawealth.com/open-account",
+        "nuvama.com/refer"
+      ]
+    },
+    {
+      "name": "Jainam Broking",
+      "aliases": [
+        "jainam broking (xts)",
+        "jainam xts b",
+        "jainam retail (xts)",
+        "jainam xts d",
+        "jainam xts c",
+        "jainam lite",
+        "jainam retail uat (xts)",
+        "jainam broking",
+        "duck jainam",
+        "space jainam"
+      ],
+      "domains": [
+        "jainam.in",
+        "duck.jainam.in"
+      ],
+      "referral_patterns": [
+        "jainam.in/open-account",
+        "jainam.in/refer"
+      ]
+    },
+    {
+      "name": "Bigul",
+      "aliases": [
+        "bigul (symphony)",
+        "bigulwl",
+        "bigul v2",
+        "bigulv1",
+        "bigul v2 uat testing",
+        "bigul",
+        "bonanza portfolio"
+      ],
+      "domains": [
+        "bigul.co"
+      ],
+      "referral_patterns": [
+        "bigul.co/open-account",
+        "bigul.co/refer"
+      ]
+    },
+    {
+      "name": "RMONEY",
+      "aliases": [
+        "rmoney (symphony)",
+        "rmoney",
+        "rmoney uat (symphony)",
+        "r money",
+        "raghav value associates"
+      ],
+      "domains": [
+        "rmoneyindia.com"
+      ],
+      "referral_patterns": [
+        "rmoneyindia.com/open-account",
+        "rmoneyindia.com/refer"
+      ]
+    },
+    {
+      "name": "Wisdom Capital",
+      "aliases": [
+        "wisdom capital (symphony)",
+        "wisdom capital",
+        "wisdomcapital"
+      ],
+      "domains": [
+        "wisdomcapital.in"
+      ],
+      "referral_patterns": [
+        "wisdomcapital.in/open-account",
+        "wisdomcapital.in/refer"
+      ]
+    },
+    {
+      "name": "Arham Wealth",
+      "aliases": [
+        "arham wealth (symphony)",
+        "arham wealth (odin)",
+        "arham wealth",
+        "arham share"
+      ],
+      "domains": [
+        "arhamwealth.com"
+      ],
+      "referral_patterns": [
+        "arhamwealth.com/open-account"
+      ]
+    },
+    {
+      "name": "Symphony Fintech",
+      "aliases": [
+        "symphony xts pro",
+        "symphony xts",
+        "symphony fintech",
+        "xts pro"
+      ],
+      "domains": [
+        "symphonyfintech.com"
+      ],
+      "referral_patterns": [
+        "symphonyfintech.com"
+      ]
+    },
+    {
+      "name": "Delta Exchange",
+      "aliases": [
+        "delta exchange india",
+        "delta india v2",
+        "delta exchange global",
+        "rising delta",
+        "delta exchange",
+        "delta.exchange"
+      ],
+      "domains": [
+        "delta.exchange",
+        "india.delta.exchange"
+      ],
+      "referral_patterns": [
+        "delta.exchange/referral",
+        "india.delta.exchange/register"
+      ]
+    },
+    {
+      "name": "Mastertrust",
+      "aliases": [
+        "mastertrust",
+        "master trust",
+        "mastertrust capital"
+      ],
+      "domains": [
+        "mastertrust.co.in"
+      ],
+      "referral_patterns": [
+        "mastertrust.co.in/open-account",
+        "mastertrust.co.in/refer"
+      ]
+    },
+    {
+      "name": "Tradejini",
+      "aliases": [
+        "tradejini cubeplus",
+        "tradejini cubeplus uat",
+        "tradejini",
+        "cubeplus"
+      ],
+      "domains": [
+        "tradejini.com",
+        "cubeplus.tradejini.com"
+      ],
+      "referral_patterns": [
+        "tradejini.com/open-account",
+        "tradejini.com/refer"
+      ]
+    },
+    {
+      "name": "AC Agarwal",
+      "aliases": [
+        "ac agarwal retail xts",
+        "ac agarwal pro xts",
+        "ac agarwal retail xts uat",
+        "ac agarwal",
+        "ac agarwal share"
+      ],
+      "domains": [
+        "acagarwal.com"
+      ],
+      "referral_patterns": [
+        "acagarwal.com/open-account"
+      ]
+    },
+    {
+      "name": "Prospera Finstocks",
+      "aliases": [
+        "prospera finstocks pro",
+        "prospera finstocks retail",
+        "prospera finstocks",
+        "prospera"
+      ],
+      "domains": [
+        "prosperafinstocks.com"
+      ],
+      "referral_patterns": [
+        "prosperafinstocks.com"
+      ]
+    },
+    {
+      "name": "Sachdeva Stocks",
+      "aliases": [
+        "sachdeva stocks retail",
+        "sachdeva stocks pro",
+        "sachdeva stocks retail uat",
+        "sachdeva stocks pro mcx",
+        "sachdeva stocks"
+      ],
+      "domains": [
+        "sachdevastocks.com"
+      ],
+      "referral_patterns": [
+        "sachdevastocks.com"
+      ]
+    },
+    {
+      "name": "Stocko",
+      "aliases": [
+        "stocko",
+        "stocko by south asian stocks"
+      ],
+      "domains": [
+        "stocko.in"
+      ],
+      "referral_patterns": [
+        "stocko.in/open-account"
+      ]
+    },
+    {
+      "name": "Zebu",
+      "aliases": [
+        "zebu mynt",
+        "zebu xts pro",
+        "zebu xts retail",
+        "zebu v2",
+        "zebu",
+        "zebu share and wealth"
+      ],
+      "domains": [
+        "zebuetrade.com",
+        "mynt.zebuetrade.com"
+      ],
+      "referral_patterns": [
+        "zebuetrade.com/open-account",
+        "zebuetrade.com/refer"
+      ]
+    },
+    {
+      "name": "Profitmart",
+      "aliases": [
+        "profitmart v2",
+        "profitmart v4",
+        "profitmart",
+        "profit mart"
+      ],
+      "domains": [
+        "profitmart.in"
+      ],
+      "referral_patterns": [
+        "profitmart.in/open-account",
+        "profitmart.in/refer"
+      ]
+    },
+    {
+      "name": "HKKR Finserv",
+      "aliases": [
+        "hkkr pro",
+        "hkkr finserv v2",
+        "hkkr finserv",
+        "hkkr"
+      ],
+      "domains": [
+        "hkkrfinserv.com"
+      ],
+      "referral_patterns": [
+        "hkkrfinserv.com"
+      ]
+    },
+    {
+      "name": "SIHL (Shah Investor's Home Ltd)",
+      "aliases": [
+        "sihl",
+        "shah investor's home ltd - pro",
+        "shah investor's home ltd",
+        "shil uat",
+        "shah investors home"
+      ],
+      "domains": [
+        "sihl.in"
+      ],
+      "referral_patterns": [
+        "sihl.in/open-account"
+      ]
+    },
+    {
+      "name": "TL Securities",
+      "aliases": [
+        "tl pro",
+        "tl sec (new)",
+        "tl securities",
+        "target level"
+      ],
+      "domains": [
+        "tlsec.in"
+      ],
+      "referral_patterns": [
+        "tlsec.in"
+      ]
+    },
+    {
+      "name": "ATS Share Brokers",
+      "aliases": [
+        "ats",
+        "ats share brokers",
+        "aditya trading solutions"
+      ],
+      "domains": [
+        "atsshare.com"
+      ],
+      "referral_patterns": [
+        "atsshare.com/open-account"
+      ]
+    },
+    {
+      "name": "Swastika Investmart",
+      "aliases": [
+        "swastikawl",
+        "swastika",
+        "swastikauat",
+        "swastika investmart",
+        "justrade"
+      ],
+      "domains": [
+        "swastika.co.in"
+      ],
+      "referral_patterns": [
+        "swastika.co.in/open-account",
+        "swastika.co.in/refer"
+      ]
+    },
+    {
+      "name": "ProStocks",
+      "aliases": [
+        "prostocks",
+        "pro stocks",
+        "sunlight broking"
+      ],
+      "domains": [
+        "prostocks.com"
+      ],
+      "referral_patterns": [
+        "prostocks.com/open-account",
+        "prostocks.com/refer"
+      ]
+    },
+    {
+      "name": "Bhartiya StockBroking",
+      "aliases": [
+        "bhartiya stockbroking (pro)",
+        "bhartiya stockbroking",
+        "bhartiya stockbroking xts-pro",
+        "bhartiya stock"
+      ],
+      "domains": [
+        "bhartiyastock.com"
+      ],
+      "referral_patterns": [
+        "bhartiyastock.com"
+      ]
+    },
+    {
+      "name": "Firstock",
+      "aliases": [
+        "firstock v2",
+        "firstock",
+        "firstock v3",
+        "the firstock"
+      ],
+      "domains": [
+        "firstock.com"
+      ],
+      "referral_patterns": [
+        "firstock.com/open-account",
+        "firstock.com/refer"
+      ]
+    },
+    {
+      "name": "Varun Capital",
+      "aliases": [
+        "varun capital",
+        "varun india pro",
+        "varun india"
+      ],
+      "domains": [
+        "varuncapital.com"
+      ],
+      "referral_patterns": [
+        "varuncapital.com"
+      ]
+    },
+    {
+      "name": "Anand Rathi",
+      "aliases": [
+        "anand rathi (symphony)",
+        "anand rathi",
+        "trade mobi"
+      ],
+      "domains": [
+        "anandrathi.com",
+        "rathi.com"
+      ],
+      "referral_patterns": [
+        "anandrathi.com/open-account",
+        "anandrathi.com/refer"
+      ]
+    },
+    {
+      "name": "Composite Edge",
+      "aliases": [
+        "compositeedge (symphony)",
+        "composite edge",
+        "compositeedge"
+      ],
+      "domains": [
+        "compositeedge.com"
+      ],
+      "referral_patterns": [
+        "compositeedge.com/open-account"
+      ]
+    },
+    {
+      "name": "Sykes And Ray Equities",
+      "aliases": [
+        "sykes and ray equities",
+        "sre",
+        "sykes & ray"
+      ],
+      "domains": [
+        "sre.co.in"
+      ],
+      "referral_patterns": [
+        "sre.co.in/open-account"
+      ]
+    },
+    {
+      "name": "TIS Broking",
+      "aliases": [
+        "tis v3",
+        "tis",
+        "tis broking"
+      ],
+      "domains": [
+        "tisbroking.com"
+      ],
+      "referral_patterns": [
+        "tisbroking.com"
+      ]
+    },
+    {
+      "name": "Nirmal Bang",
+      "aliases": [
+        "nirmal bang (symphony)",
+        "nirmal bang (odin)",
+        "nirmal bang",
+        "beyond nirmal bang"
+      ],
+      "domains": [
+        "nirmalbang.com"
+      ],
+      "referral_patterns": [
+        "nirmalbang.com/open-account",
+        "nirmalbang.com/refer"
+      ]
+    },
+    {
+      "name": "Newberry Capital",
+      "aliases": [
+        "newberry capital pro",
+        "newberry capital",
+        "newberry"
+      ],
+      "domains": [
+        "newberry.in"
+      ],
+      "referral_patterns": [
+        "newberry.in"
+      ]
+    },
+    {
+      "name": "B N Rathi Securities",
+      "aliases": [
+        "b n rathi securities ltd",
+        "b n rathi securities ltd v2",
+        "b n rathi",
+        "bnr securities"
+      ],
+      "domains": [
+        "bnrsecurities.com"
+      ],
+      "referral_patterns": [
+        "bnrsecurities.com/open-account"
+      ]
+    },
+    {
+      "name": "Religare Broking",
+      "aliases": [
+        "religare (odin)",
+        "religare wl (odin)",
+        "religare",
+        "religare broking",
+        "dynami"
+      ],
+      "domains": [
+        "religareonline.com"
+      ],
+      "referral_patterns": [
+        "religareonline.com/open-account",
+        "religareonline.com/refer"
+      ]
+    },
+    {
+      "name": "SW Capital",
+      "aliases": [
+        "sw capital pro",
+        "sw capital"
+      ],
+      "domains": [
+        "swcapital.in"
+      ],
+      "referral_patterns": [
+        "swcapital.in"
+      ]
+    },
+    {
+      "name": "Choice Broking",
+      "aliases": [
+        "choice equity",
+        "choice equity wl",
+        "choice equity v2",
+        "choice broking",
+        "choice equity broking",
+        "jiffy"
+      ],
+      "domains": [
+        "choiceindia.com"
+      ],
+      "referral_patterns": [
+        "choiceindia.com/open-account",
+        "choiceindia.com/refer"
+      ]
+    },
+    {
+      "name": "Achintya Securities",
+      "aliases": [
+        "achintya securities pro",
+        "achintya securities",
+        "achintya group"
+      ],
+      "domains": [
+        "achintyagroup.com"
+      ],
+      "referral_patterns": [
+        "achintyagroup.com"
+      ]
+    },
+    {
+      "name": "IITWL",
+      "aliases": [
+        "itwl",
+        "iitwl"
+      ],
+      "domains": [
+        "iitwl.com"
+      ],
+      "referral_patterns": [
+        "iitwl.com"
+      ]
+    },
+    {
+      "name": "Aditya Birla Money",
+      "aliases": [
+        "aditya birla money (new)",
+        "aditya birla money - uat",
+        "aditya birla money v2",
+        "aditya birla money",
+        "abm"
+      ],
+      "domains": [
+        "adityabirlamoney.com"
+      ],
+      "referral_patterns": [
+        "adityabirlamoney.com/open-account"
+      ]
+    },
+    {
+      "name": "Sky Broking",
+      "aliases": [
+        "sky broking",
+        "sky commodities"
+      ],
+      "domains": [
+        "skybroking.com"
+      ],
+      "referral_patterns": [
+        "skybroking.com/open-account"
+      ]
+    },
+    {
+      "name": "LKP Securities",
+      "aliases": [
+        "lkp securities",
+        "lkp securities v2",
+        "lkp",
+        "lkp finance"
+      ],
+      "domains": [
+        "lkpsec.com"
+      ],
+      "referral_patterns": [
+        "lkpsec.com/open-account"
+      ]
+    },
+    {
+      "name": "SMIFS (ARTH)",
+      "aliases": [
+        "smifs-arth",
+        "smifs",
+        "smifs limited"
+      ],
+      "domains": [
+        "smifs.com"
+      ],
+      "referral_patterns": [
+        "smifs.com/open-account"
+      ]
+    },
+    {
+      "name": "Econo Broking",
+      "aliases": [
+        "econo broking",
+        "ezono broking"
+      ],
+      "domains": [
+        "econobroking.com"
+      ],
+      "referral_patterns": [
+        "econobroking.com/open-account"
+      ]
+    },
+    {
+      "name": "HDFC Securities / HDFC Sky",
+      "aliases": [
+        "hdfc investright",
+        "hdfc sky",
+        "hdfc wl",
+        "hdfc securities",
+        "hdfc sec"
+      ],
+      "domains": [
+        "hdfcsky.com",
+        "hdfcsec.com"
+      ],
+      "referral_patterns": [
+        "hdfcsky.com/open-account",
+        "hdfcsec.com/open-account",
+        "hdfcsky.page.link"
+      ]
+    },
+    {
+      "name": "SMC Global",
+      "aliases": [
+        "smc global (odin)",
+        "smc (open api)",
+        "smc global uat (symphony)",
+        "smc global",
+        "smc securities",
+        "smc ace"
+      ],
+      "domains": [
+        "smcindiaonline.com"
+      ],
+      "referral_patterns": [
+        "smcindiaonline.com/open-account",
+        "smcindiaonline.com/refer"
+      ]
+    },
+    {
+      "name": "Definedge Securities",
+      "aliases": [
+        "definedge securities",
+        "defingedge securities",
+        "definedge",
+        "opstra"
+      ],
+      "domains": [
+        "definedgesecurities.com",
+        "definedge.com"
+      ],
+      "referral_patterns": [
+        "definedgesecurities.com/open-account",
+        "definedgesecurities.com/refer"
+      ]
+    },
+    {
+      "name": "Samco Securities",
+      "aliases": [
+        "samco (v2)",
+        "samco",
+        "samco securities",
+        "stocknote"
+      ],
+      "domains": [
+        "samco.in"
+      ],
+      "referral_patterns": [
+        "samco.in/open-account",
+        "samco.in/refer"
+      ]
+    },
+    {
+      "name": "Tradier",
+      "aliases": [
+        "tradier",
+        "tradier brokerage"
+      ],
+      "domains": [
+        "tradier.com"
+      ],
+      "referral_patterns": [
+        "tradier.com"
+      ]
+    },
+    {
+      "name": "Findoc",
+      "aliases": [
+        "findoc (symphony)",
+        "findoc",
+        "myfindoc"
+      ],
+      "domains": [
+        "myfindoc.com",
+        "findoc.com"
+      ],
+      "referral_patterns": [
+        "myfindoc.com/open-account"
+      ]
+    },
+    {
+      "name": "TradeStation",
+      "aliases": [
+        "trade station",
+        "trade station paper",
+        "tradestation(connect-trade)",
+        "tradestation"
+      ],
+      "domains": [
+        "tradestation.com"
+      ],
+      "referral_patterns": [
+        "tradestation.com"
+      ]
+    },
+    {
+      "name": "Arihant Capital",
+      "aliases": [
+        "arihant plus v2",
+        "arihant plus",
+        "arihant capital",
+        "arihant"
+      ],
+      "domains": [
+        "arihantcapital.com"
+      ],
+      "referral_patterns": [
+        "arihantcapital.com/open-account",
+        "arihantcapital.com/refer"
+      ]
+    },
+    {
+      "name": "TradeSmart",
+      "aliases": [
+        "tradesmart (kambala)",
+        "tradesmart",
+        "tradesmart online",
+        "vns finance"
+      ],
+      "domains": [
+        "tradesmartonline.in"
+      ],
+      "referral_patterns": [
+        "tradesmartonline.in/open-account",
+        "tradesmartonline.in/refer"
+      ]
+    },
+    {
+      "name": "CoinDCX",
+      "aliases": [
+        "coindcx",
+        "coindcx - india",
+        "coindcx pro"
+      ],
+      "domains": [
+        "coindcx.com"
+      ],
+      "referral_patterns": [
+        "coindcx.com/signup",
+        "coindcx.com/referral",
+        "coindcx.com/invite",
+        "join.coindcx.com"
+      ]
+    },
+    {
+      "name": "Palak Tradetech",
+      "aliases": [
+        "palak tradetech pro",
+        "palak tradetech",
+        "palak securities"
+      ],
+      "domains": [
+        "palaktradetech.com"
+      ],
+      "referral_patterns": [
+        "palaktradetech.com"
+      ]
+    },
+    {
+      "name": "Sunidhi Securities",
+      "aliases": [
+        "sunidhi securities",
+        "sunidhi"
+      ],
+      "domains": [
+        "sunidhi.com"
+      ],
+      "referral_patterns": [
+        "sunidhi.com/open-account"
+      ]
+    },
+    {
+      "name": "Stoxkart",
+      "aliases": [
+        "stoxkart v2",
+        "stoxkart v3",
+        "stoxkart",
+        "smc stoxkart"
+      ],
+      "domains": [
+        "stoxkart.com"
+      ],
+      "referral_patterns": [
+        "stoxkart.com/open-account",
+        "stoxkart.com/refer"
+      ]
+    },
+    {
+      "name": "Alpaca",
+      "aliases": [
+        "alpaca papertrading",
+        "alpaca live",
+        "alpaca",
+        "alpaca markets"
+      ],
+      "domains": [
+        "alpaca.markets"
+      ],
+      "referral_patterns": [
+        "alpaca.markets"
+      ]
+    },
+    {
+      "name": "Acumen Group",
+      "aliases": [
+        "acumen group (touch broking)",
+        "acumen group",
+        "acumen share",
+        "touch broking"
+      ],
+      "domains": [
+        "acumengroup.in"
+      ],
+      "referral_patterns": [
+        "acumengroup.in/open-account"
+      ]
+    },
+    {
+      "name": "INDmoney",
+      "aliases": [
+        "indmoney",
+        "ind money",
+        "ind money app"
+      ],
+      "domains": [
+        "indmoney.com"
+      ],
+      "referral_patterns": [
+        "indmoney.com/refer",
+        "indmoney.page.link"
+      ]
+    },
+    {
+      "name": "Excel Stock",
+      "aliases": [
+        "excel stock",
+        "excel broking"
+      ],
+      "domains": [
+        "excelstock.com"
+      ],
+      "referral_patterns": [
+        "excelstock.com"
+      ]
+    },
+    {
+      "name": "Wealthy",
+      "aliases": [
+        "wealthy",
+        "wealthy.in"
+      ],
+      "domains": [
+        "wealthy.in"
+      ],
+      "referral_patterns": [
+        "wealthy.in/refer"
+      ]
+    },
+    {
+      "name": "GRD Securities",
+      "aliases": [
+        "grd securities (symphony)",
+        "grd securities",
+        "grd"
+      ],
+      "domains": [
+        "grdsecurities.com"
+      ],
+      "referral_patterns": [
+        "grdsecurities.com"
+      ]
+    },
+    {
+      "name": "Paytm Money",
+      "aliases": [
+        "paytm money",
+        "paytm"
+      ],
+      "domains": [
+        "paytmmoney.com"
+      ],
+      "referral_patterns": [
+        "paytmmoney.com/refer",
+        "paytmmoney.page.link"
+      ]
+    },
+    {
+      "name": "Tastytrade",
+      "aliases": [
+        "tastytrade",
+        "tastytrade (connect-trade)",
+        "tastyworks"
+      ],
+      "domains": [
+        "tastytrade.com"
+      ],
+      "referral_patterns": [
+        "tastytrade.com"
+      ]
+    },
+    {
+      "name": "Multigain Securities",
+      "aliases": [
+        "multigain securities",
+        "multigain"
+      ],
+      "domains": [
+        "multigain.co.in"
+      ],
+      "referral_patterns": [
+        "multigain.co.in/open-account"
+      ]
+    },
+    {
+      "name": "TradeZero",
+      "aliases": [
+        "tradezero pt (connect-trade)",
+        "tradezero",
+        "tradezero international"
+      ],
+      "domains": [
+        "tradezero.co"
+      ],
+      "referral_patterns": [
+        "tradezero.co"
+      ]
+    },
+    {
+      "name": "Prabhudas Lilladher",
+      "aliases": [
+        "prabhudas liladhar intellect",
+        "prabhudas lilladher",
+        "pl india",
+        "pl intellect"
+      ],
+      "domains": [
+        "plindia.com"
+      ],
+      "referral_patterns": [
+        "plindia.com/open-account",
+        "plindia.com/refer"
+      ]
+    },
+    {
+      "name": "CoinSwitch",
+      "aliases": [
+        "coinswitch",
+        "coinswitch kuber"
+      ],
+      "domains": [
+        "coinswitch.co"
+      ],
+      "referral_patterns": [
+        "coinswitch.co/referral"
+      ]
+    },
+    {
+      "name": "Stratagem Broking",
+      "aliases": [
+        "stratagem broking pro",
+        "stratagem broking"
+      ],
+      "domains": [
+        "stratagembroking.com"
+      ],
+      "referral_patterns": [
+        "stratagembroking.com"
+      ]
+    },
+    {
+      "name": "ZebPay",
+      "aliases": [
+        "zebpay",
+        "zeb pay"
+      ],
+      "domains": [
+        "zebpay.com"
+      ],
+      "referral_patterns": [
+        "zebpay.com/ref"
+      ]
+    },
+    {
+      "name": "ANS Broking",
+      "aliases": [
+        "ans broking",
+        "ans broking xts pro"
+      ],
+      "domains": [
+        "ansbroking.com"
+      ],
+      "referral_patterns": [
+        "ansbroking.com"
+      ]
+    },
+    {
+      "name": "Binance",
+      "aliases": [
+        "binance turkiye",
+        "binance",
+        "trbinance"
+      ],
+      "domains": [
+        "binance.com",
+        "trbinance.com"
+      ],
+      "referral_patterns": [
+        "binance.com/activity/referral",
+        "accounts.binance.com/register"
+      ]
+    },
+    {
+      "name": "Shree Balaji Multicommodities",
+      "aliases": [
+        "shree balaji multicomm pro",
+        "shree balaji multicommodities",
+        "shree balaji"
+      ],
+      "domains": [
+        "balajicommodities.com"
+      ],
+      "referral_patterns": [
+        "balajicommodities.com"
+      ]
+    },
+    {
+      "name": "Tiqs",
+      "aliases": [
+        "tiqs",
+        "tiqs trade"
+      ],
+      "domains": [
+        "tiqs.com"
+      ],
+      "referral_patterns": [
+        "tiqs.com"
+      ]
+    },
+    {
+      "name": "Rupeezy",
+      "aliases": [
+        "rupeezy",
+        "astha trade",
+        "asthatrade"
+      ],
+      "domains": [
+        "rupeezy.com",
+        "asthatrade.com"
+      ],
+      "referral_patterns": [
+        "rupeezy.com/open-account",
+        "rupeezy.com/refer"
+      ]
+    },
+    {
+      "name": "Pocketful",
+      "aliases": [
+        "pocketful",
+        "pocketful v2",
+        "pocketful by pace"
+      ],
+      "domains": [
+        "pocketful.in"
+      ],
+      "referral_patterns": [
+        "pocketful.in/open-account",
+        "pocketful.in/refer"
+      ]
+    },
+    {
+      "name": "Marfatia Stock Broking",
+      "aliases": [
+        "marfatia stock broking",
+        "marfatia"
+      ],
+      "domains": [
+        "marfatiastock.com"
+      ],
+      "referral_patterns": [
+        "marfatiastock.com"
+      ]
+    },
+    {
+      "name": "AlphaMatrix",
+      "aliases": [
+        "alphamatrix (xts)",
+        "alphamatrix",
+        "alpha matrix"
+      ],
+      "domains": [
+        "alphamatrix.in"
+      ],
+      "referral_patterns": [
+        "alphamatrix.in"
+      ]
+    },
+    {
+      "name": "Betala Stock Broking",
+      "aliases": [
+        "betala stock broking",
+        "betala"
+      ],
+      "domains": [
+        "betalastock.com"
+      ],
+      "referral_patterns": [
+        "betalastock.com"
+      ]
+    },
+    {
+      "name": "Indira Securities",
+      "aliases": [
+        "indira securities (odin)",
+        "indira securities",
+        "trade mark"
+      ],
+      "domains": [
+        "indirasecurities.com"
+      ],
+      "referral_patterns": [
+        "indirasecurities.com/open-account",
+        "indirasecurities.com/refer"
+      ]
+    },
+    {
+      "name": "iWealth",
+      "aliases": [
+        "iwealth",
+        "i wealth"
+      ],
+      "domains": [
+        "iwealth.co.in"
+      ],
+      "referral_patterns": [
+        "iwealth.co.in"
+      ]
+    },
+    {
+      "name": "Bhansali Value",
+      "aliases": [
+        "bhansali value pro",
+        "bhansali value"
+      ],
+      "domains": [
+        "bhansalivalue.com"
+      ],
+      "referral_patterns": [
+        "bhansalivalue.com"
+      ]
+    },
+    {
+      "name": "Dojis",
+      "aliases": [
+        "dojis",
+        "doji"
+      ],
+      "domains": [
+        "dojis.com"
+      ],
+      "referral_patterns": [
+        "dojis.com"
+      ]
+    },
+    {
+      "name": "Adroit Share & Stock",
+      "aliases": [
+        "adroit share & stock pvt ltd",
+        "adroit share",
+        "adroit financial"
+      ],
+      "domains": [
+        "adroitfinancial.com"
+      ],
+      "referral_patterns": [
+        "adroitfinancial.com/open-account"
+      ]
+    },
+    {
+      "name": "Share India",
+      "aliases": [
+        "share india algoplus xts-pro",
+        "share india",
+        "algoplus"
+      ],
+      "domains": [
+        "shareindia.com"
+      ],
+      "referral_patterns": [
+        "shareindia.com/open-account",
+        "shareindia.com/refer"
+      ]
+    },
+    {
+      "name": "Broker I1",
+      "aliases": [
+        "broker i1"
+      ],
+      "domains": [
+        "brokeri1.com"
+      ],
+      "referral_patterns": [
+        "brokeri1.com"
+      ]
+    },
+    {
+      "name": "ICICI Direct",
+      "aliases": [
+        "icici direct",
+        "icicidirect",
+        "icici securities"
+      ],
+      "domains": [
+        "icicidirect.com"
+      ],
+      "referral_patterns": [
+        "icicidirect.com/open-account"
+      ]
+    },
+    {
+      "name": "Bajaj Broking",
+      "aliases": [
+        "bajaj broking",
+        "bajaj securities",
+        "bajaj finserv broking"
+      ],
+      "domains": [
+        "bajajbroking.in"
+      ],
+      "referral_patterns": [
+        "bajajbroking.in/open-account"
+      ]
+    },
+    {
+      "name": "Axis Direct",
+      "aliases": [
+        "axis direct",
+        "axisdirect"
+      ],
+      "domains": [
+        "axisdirect.in"
+      ],
+      "referral_patterns": [
+        "axisdirect.in/open-account"
+      ]
+    },
+    {
+      "name": "SBI Securities",
+      "aliases": [
+        "sbi securities",
+        "sbismart"
+      ],
+      "domains": [
+        "sbismart.com"
+      ],
+      "referral_patterns": [
+        "sbismart.com/open-account"
+      ]
+    }
+  ]
+}
