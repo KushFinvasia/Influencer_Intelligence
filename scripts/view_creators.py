@@ -114,6 +114,8 @@ def fetch_creators_table_data():
         c.primary_language,
         c.influencer_score,
         c.audience_bucket,
+        c.is_relevant,
+        c.targets_india,
         p.platform,
         p.followers,
         p.profile_url
@@ -349,6 +351,8 @@ def fetch_creators_table_data():
                 "structured_socials": structured_socials,
                 "score": f"{r['influencer_score']:.1f}" if r["influencer_score"] is not None else "0.0",
                 "profile_url": r["profile_url"] or "",
+                "is_relevant": bool(r["is_relevant"]) if r["is_relevant"] is not None else True,
+                "targets_india": bool(r["targets_india"]) if r["targets_india"] is not None else True,
                 # Performance metrics
                 "posts_analyzed": posts_analyzed,
                 "views_analyzed": views_analyzed,

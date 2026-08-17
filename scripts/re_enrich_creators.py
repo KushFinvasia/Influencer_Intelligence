@@ -48,21 +48,23 @@ async def re_enrich_all():
         for creator in creators:
             logger.info("Processing creator #%d: %s", creator.id, creator.name)
 
-            # Get platform profile
+            # Get platform profiles
             pp_res = await db.execute(
                 select(PlatformProfile).where(PlatformProfile.creator_id == creator.id)
             )
-            pp = pp_res.scalar_one_or_none()
+            pps = pp_res.scalars().all()
+            pp = pps[0] if pps else None
 
             links = []
             recent_titles = []
             video_descs = []
             video_ids = []
 
-            if pp and pp.platform == "youtube" and pp.platform_user_id:
-                try:
-                    # Fetch recent videos to get up-to-date description links and transcripts
-                    videos = await yt_crawler.fetch_content(pp.platform_user_id, max_items=5)
+            for p_profile in pps:
+                if p_profile.platform == "youtube" and p_profile.platform_user_id:
+                    try:
+                        # Fetch recent videos to get up-to-date description links and transcripts
+                        videos = await yt_crawler.fetch_content(p_profile.platform_user_id, max_items=5)
                     for v in videos:
                         if v.video_id:
                             video_ids.append(v.video_id)

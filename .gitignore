@@ -11,7 +11,6 @@ env/
 
 # Databases
 *.db
-!creator_intel.db
 *.sqlite
 *.sqlite3
 *.db-shm

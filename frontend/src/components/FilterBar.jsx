@@ -98,6 +98,27 @@ export default function FilterBar({ filters, onChange, options }) {
           </select>
         </div>
 
+        {/* Stock Market & India Checkboxes */}
+        <label className="filter-checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', color: 'var(--text-main)', userSelect: 'none', padding: '6px 12px', background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '8px' }}>
+          <input
+            type="checkbox"
+            checked={Boolean(filters.stockMarketOnly)}
+            onChange={e => onChange({ ...filters, stockMarketOnly: e.target.checked })}
+            style={{ cursor: 'pointer', accentColor: '#0284c7', width: '16px', height: '16px' }}
+          />
+          <span>🎯 Stock Market Only</span>
+        </label>
+
+        <label className="filter-checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', color: 'var(--text-main)', userSelect: 'none', padding: '6px 12px', background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '8px' }}>
+          <input
+            type="checkbox"
+            checked={Boolean(filters.indiaOnly)}
+            onChange={e => onChange({ ...filters, indiaOnly: e.target.checked })}
+            style={{ cursor: 'pointer', accentColor: '#0284c7', width: '16px', height: '16px' }}
+          />
+          <span>🇮🇳 India Target Only</span>
+        </label>
+
         {/* More Filters Button */}
         <button
           className={`btn btn--outline filter-more-btn ${showMoreFilters || hasExtraFilters ? 'filter-more-btn--active' : ''}`}

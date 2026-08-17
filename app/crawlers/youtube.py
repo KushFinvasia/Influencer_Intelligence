@@ -219,6 +219,13 @@ class YouTubeCrawler(BaseCrawler):
                         v.description for v in videos[:5] if v.description
                     ]
                     profile.recent_video_ids = [v.video_id for v in videos]
+                    if not isinstance(profile.raw_data, dict):
+                        profile.raw_data = {}
+                    profile.raw_data["videos"] = [
+                        v.raw_payload if (hasattr(v, "raw_payload") and v.raw_payload)
+                        else (v.model_dump() if hasattr(v, "model_dump") else getattr(v, "__dict__", {}))
+                        for v in videos
+                    ]
 
                     # Extract mentioned channels and URLs from video text (last 5 videos)
                     for video in videos[:5]:

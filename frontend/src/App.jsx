@@ -46,6 +46,8 @@ export default function App() {
     broker: '',
     engagement: '',
     contact: '',
+    stockMarketOnly: false,
+    indiaOnly: false,
   })
 
   // Sorting state
@@ -261,8 +263,8 @@ export default function App() {
           onExportCSV={handleExportCSV}
         />
 
-        {/* 5 Metric Summary Cards */}
-        <MetricCards creators={creators} />
+        {/* 5 Metric Summary Cards (dynamically updates with filters) */}
+        <MetricCards creators={filteredCreators} />
 
         {/* Table & Controls (Fullscreen target) */}
         <div className={`table-fullscreen-wrapper ${isFullscreen ? 'isFullscreen' : ''}`}>

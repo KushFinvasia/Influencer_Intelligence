@@ -34,6 +34,8 @@ export function applyFilters(creators, filters) {
       if (filters.contact === 'none' && (hasEmail || hasPhone)) return false
       if (filters.contact === 'any' && !hasEmail && !hasPhone) return false
     }
+    if (filters.stockMarketOnly && (c.is_relevant === false || c.is_relevant === 0)) return false
+    if (filters.indiaOnly && (c.targets_india === false || c.targets_india === 0)) return false
     return true
   })
 }
