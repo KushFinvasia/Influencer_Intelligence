@@ -25,6 +25,18 @@ class Deduplicator:
     def __init__(self) -> None:
         self._normalizer = Normalizer()
 
+    async def _creator_has_platform(
+        self, db: AsyncSession, creator_id: int, platform: str
+    ) -> bool:
+        """Check if a creator already has a profile on the target platform."""
+        result = await db.execute(
+            select(PlatformProfile.id).where(
+                PlatformProfile.creator_id == creator_id,
+                PlatformProfile.platform == platform,
+            )
+        )
+        return result.scalar_one_or_none() is not None
+
     async def find_duplicate(
         self,
         db: AsyncSession,
@@ -39,6 +51,9 @@ class Deduplicator:
         4. Cross-platform link match → high confidence
         5. Name + overlapping links → medium (flagged for review)
 
+        Guard Rule: A creator cannot have multiple profiles on the SAME platform.
+        If a candidate creator already has a profile on profile.platform, skip merge.
+
         Returns:
             Existing creator ID if match found, else None.
         """
@@ -52,6 +67,12 @@ class Deduplicator:
             )
             creator_id = result.scalar_one_or_none()
             if creator_id:
+                if await self._creator_has_platform(db, creator_id, profile.platform):
+                    logger.info(
+                        "Dedup: email match '%s' -> creator %d, but creator already has a %s profile. Creating separate creator.",
+                        email, creator_id, profile.platform
+                    )
+                    continue
                 logger.info(
                     "Dedup: email match '%s' → creator %d", email, creator_id
                 )
@@ -67,6 +88,12 @@ class Deduplicator:
             )
             creator_id = result.scalar_one_or_none()
             if creator_id:
+                if await self._creator_has_platform(db, creator_id, profile.platform):
+                    logger.info(
+                        "Dedup: phone match '%s' -> creator %d, but creator already has a %s profile. Creating separate creator.",
+                        phone, creator_id, profile.platform
+                    )
+                    continue
                 logger.info(
                     "Dedup: phone match '%s' → creator %d", phone, creator_id
                 )
@@ -83,6 +110,12 @@ class Deduplicator:
             )
             creator_id = result.scalar_one_or_none()
             if creator_id:
+                if await self._creator_has_platform(db, creator_id, profile.platform):
+                    logger.info(
+                        "Dedup: website match '%s' -> creator %d, but creator already has a %s profile. Creating separate creator.",
+                        website, creator_id, profile.platform
+                    )
+                    continue
                 logger.info(
                     "Dedup: website match '%s' → creator %d",
                     website,
@@ -96,7 +129,8 @@ class Deduplicator:
             db, profile, contacts
         )
         if cross_platform_id:
-            return cross_platform_id
+            if not await self._creator_has_platform(db, cross_platform_id, profile.platform):
+                return cross_platform_id
 
         # Strategy 5: Name match (low confidence — flag for review)
         name = profile.display_name or profile.username
