@@ -1,15 +1,82 @@
 /** Filter logic for creator data. */
 
+const SEARCH_KEYS = [
+  'name',
+  'email',
+  'phone',
+  'category',
+  'language',
+  'broker',
+  'platform',
+  'content_format',
+  'format_filter',
+  'format_label',
+  'website',
+  'profile_url',
+  'social_handles',
+  'structured_socials',
+  'followers',
+  'bucket',
+]
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[|/_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function collectTextFragments(value, bucket) {
+  if (value === null || value === undefined) return
+  if (Array.isArray(value)) {
+    value.forEach(item => collectTextFragments(item, bucket))
+    return
+  }
+  if (typeof value === 'object') {
+    Object.values(value).forEach(item => collectTextFragments(item, bucket))
+    return
+  }
+  const normalized = normalizeText(value)
+  if (normalized && normalized !== '-') {
+    bucket.push(normalized)
+  }
+}
+
+function expandQueryTerms(rawSearch) {
+  const terms = normalizeText(rawSearch).split(' ').filter(Boolean)
+  const expanded = []
+
+  for (const term of terms) {
+    expanded.push(term)
+    if (term === 'yt') expanded.push('youtube')
+    if (term === 'insta') expanded.push('instagram')
+    if (term === 'reel') expanded.push('reels')
+    if (term === 'short') expanded.push('shorts')
+  }
+
+  return [...new Set(expanded)]
+}
+
+function buildSearchText(creator) {
+  const fragments = []
+  SEARCH_KEYS.forEach(key => collectTextFragments(creator[key], fragments))
+
+  // Add a punctuation-light variant so queries like "pushkarrajthakur"
+  // can match handles written as "@pushkarrajthakur".
+  const base = fragments.join(' ')
+  const compact = base.replace(/[^a-z0-9]+/g, ' ')
+  return `${base} ${compact}`
+}
+
 export function applyFilters(creators, filters) {
   return creators.filter(c => {
     if (filters.search) {
-      const q = filters.search.toLowerCase()
-      const searchable = [
-        c.name, c.email, c.phone, c.category, c.language,
-        c.broker, c.platform, c.content_format, c.format_label,
-        c.website, c.social_handles,
-      ].join(' ').toLowerCase()
-      if (!searchable.includes(q)) return false
+      const terms = expandQueryTerms(filters.search)
+      const searchable = buildSearchText(c)
+      if (!terms.every(term => searchable.includes(term))) return false
     }
     if (filters.platform && c.platform.toLowerCase() !== filters.platform.toLowerCase()) return false
     if (filters.tier && c.bucket !== filters.tier) return false

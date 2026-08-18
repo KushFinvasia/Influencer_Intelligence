@@ -416,9 +416,9 @@ button.sidebar__nav-item.sidebar__nav-item--dashboard {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  padding: 4px;
-  z-index: 100;
-  min-width: 140px;
+  padding: 6px;
+  z-index: 200;
+  min-width: 160px;
 }
 
 .export-menu__item {
@@ -1186,8 +1186,12 @@ button.sidebar__nav-item.sidebar__nav-item--dashboard {
 .popover-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 150;
+  z-index: 140;
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.popover-backdrop--transparent {
+  background-color: transparent;
 }
 
 /* Column Settings Modal */

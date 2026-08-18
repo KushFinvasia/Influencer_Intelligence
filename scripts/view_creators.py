@@ -98,14 +98,15 @@ def fetch_creators_table_data():
         print(f"Error: Database file not found at {DB_PATH}")
         return []
 
-    conn = sqlite3.connect(DB_PATH)
+    db_uri = f"file:{DB_PATH.resolve().as_posix()}?mode=ro"
+    conn = sqlite3.connect(db_uri, uri=True, timeout=5.0)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
 
     query = """
     SELECT 
         c.id,
-        c.name,
+        COALESCE(NULLIF(p.display_name, ''), c.name) AS name,
         c.email,
         c.phone,
         c.website,
@@ -125,34 +126,90 @@ def fetch_creators_table_data():
     """
 
     rows = c.execute(query).fetchall()
+
+    # Pre-fetch all broker associations in 1 query
+    broker_map = {}
+    try:
+        for b_row in c.execute("SELECT creator_id, broker_name FROM broker_associations").fetchall():
+            cid, bname = b_row[0], b_row[1]
+            if bname and bname not in broker_map.setdefault(cid, []):
+                broker_map[cid].append(bname)
+    except sqlite3.OperationalError:
+        pass
+
+    # Pre-fetch all social links in 1 query
+    social_map = {}
+    try:
+        for s_row in c.execute("SELECT creator_id, platform, url, value FROM social_links").fetchall():
+            social_map.setdefault(s_row[0], []).append(s_row)
+    except sqlite3.OperationalError:
+        pass
+
+    # Pre-fetch all instagram metrics in 1 query
+    insta_metrics_map = {}
+    try:
+        im_rows = c.execute("""
+            SELECT creator_id, posts_analyzed, views_analyzed, likes_analyzed, comments_analyzed,
+                   average_views, median_views, average_likes, median_likes, average_comments, median_comments,
+                   engagement_rate, metrics_calculated_at
+            FROM instagram_metrics ORDER BY metrics_calculated_at ASC
+        """).fetchall()
+        for im in im_rows:
+            insta_metrics_map[im[0]] = im
+    except sqlite3.OperationalError:
+        pass
+
+    # Pre-fetch all youtube metrics in 1 query
+    yt_metrics_map = {}
+    try:
+        ym_rows = c.execute("""
+            SELECT creator_id, videos_analyzed, views_analyzed, likes_analyzed, comments_analyzed,
+                   average_views, median_views, average_likes, median_likes, average_comments, median_comments,
+                   engagement_rate, engagement_eligible_videos, shorts_ratio, metrics_calculated_at
+            FROM youtube_metrics ORDER BY metrics_calculated_at ASC
+        """).fetchall()
+        for ym in ym_rows:
+            yt_metrics_map[ym[0]] = ym
+    except sqlite3.OperationalError:
+        pass
+
+    # Pre-fetch instagram media counts in 1 query
+    media_counts_map = {}
+    try:
+        mc_rows = c.execute("""
+            SELECT pp.creator_id, LOWER(p.media_type), COUNT(*)
+            FROM posts p
+            JOIN platform_profiles pp ON p.platform_profile_id = pp.id
+            GROUP BY pp.creator_id, LOWER(p.media_type)
+        """).fetchall()
+        for mc in mc_rows:
+            cid, mtype, cnt = mc[0], mc[1], mc[2]
+            if mtype:
+                media_counts_map.setdefault(cid, {})[mtype] = cnt
+    except sqlite3.OperationalError:
+        pass
+
     results = []
 
     for r in rows:
         cid = r["id"]
 
         # Detected brokers
-        brokers = [
-            b[0]
-            for b in c.execute(
-                "SELECT DISTINCT broker_name FROM broker_associations WHERE creator_id = ?",
-                (cid,),
-            ).fetchall()
-        ]
+        brokers = broker_map.get(cid, [])
         broker_str = ", ".join(brokers) if brokers else "-"
 
         # Structured Social links
-        social_rows = c.execute(
-            "SELECT platform, url, value FROM social_links WHERE creator_id = ?",
-            (cid,),
-        ).fetchall()
-
+        social_rows = social_map.get(cid, [])
         structured_socials = []
         text_socials = []
         website_candidates = []
+        phone_fallback = None
+        website_fallback = None
+        email_fallback = None
 
         for s in social_rows:
-            plt = s[0].lower()
-            url_val = s[1] or s[2] or ""
+            plt = (s[1] or "").lower()
+            url_val = s[2] or s[3] or ""
             if not url_val:
                 continue
 
@@ -166,44 +223,20 @@ def fetch_creators_table_data():
                 text_socials.append(f"{plt}: {url_val}")
             elif plt == "website":
                 website_candidates.append(url_val)
+                if not website_fallback: website_fallback = s[3] or url_val
+            elif plt == "phone" and not phone_fallback:
+                phone_fallback = s[3] or url_val
+            elif plt == "email" and not email_fallback:
+                email_fallback = s[3] or url_val
 
         social_str = ", ".join(text_socials) if text_socials else "-"
 
-        # Phone fallback from social_links
-        phone = r["phone"]
-        if not phone:
-            p_row = c.execute(
-                "SELECT value FROM social_links WHERE creator_id = ? AND platform = ? LIMIT 1",
-                (cid, "phone"),
-            ).fetchone()
-            if p_row:
-                phone = p_row[0]
+        phone = r["phone"] or phone_fallback
+        website = r["website"] or (website_candidates[0] if website_candidates else website_fallback)
+        email = r["email"] or email_fallback
 
-        # Website resolution (clean domain)
-        website = r["website"]
-        if not website and website_candidates:
-            website = website_candidates[0]
-        if not website:
-            w_row = c.execute(
-                "SELECT value FROM social_links WHERE creator_id = ? AND platform = ? LIMIT 1",
-                (cid, "website"),
-            ).fetchone()
-            if w_row:
-                website = w_row[0]
-
-        # Email fallback from social_links
-        email = r["email"]
-        if not email:
-            e_row = c.execute(
-                "SELECT value FROM social_links WHERE creator_id = ? AND platform = ? LIMIT 1",
-                (cid, "email"),
-            ).fetchone()
-            if e_row:
-                email = e_row[0]
-
-        # Platform Performance Metrics (Latest timestamped snapshot from instagram_metrics or youtube_metrics)
         platform_lower = (r["platform"] or "youtube").lower()
-        
+
         posts_analyzed = 0
         views_analyzed = 0
         likes_analyzed = 0
@@ -220,108 +253,41 @@ def fetch_creators_table_data():
         metrics_time = None
 
         if platform_lower == "instagram":
-            try:
-                im_row = c.execute(
-                    """
-                    SELECT 
-                        posts_analyzed,
-                        views_analyzed,
-                        likes_analyzed,
-                        comments_analyzed,
-                        average_views,
-                        median_views,
-                        average_likes,
-                        median_likes,
-                        average_comments,
-                        median_comments,
-                        engagement_rate,
-                        metrics_calculated_at
-                    FROM instagram_metrics
-                    WHERE creator_id = ?
-                    ORDER BY metrics_calculated_at DESC
-                    LIMIT 1
-                    """,
-                    (cid,),
-                ).fetchone()
+            im_row = insta_metrics_map.get(cid)
+            if im_row:
+                posts_analyzed = im_row[1]
+                views_analyzed = im_row[2]
+                likes_analyzed = im_row[3]
+                comments_analyzed = im_row[4]
+                avg_views_raw = im_row[5]
+                med_views_raw = im_row[6]
+                avg_likes_raw = im_row[7]
+                med_likes_raw = im_row[8]
+                avg_comm_raw = im_row[9]
+                med_comm_raw = im_row[10]
+                eng_rate_raw = im_row[11]
+                metrics_time = im_row[12]
 
-                if im_row:
-                    posts_analyzed = im_row[0]
-                    views_analyzed = im_row[1]
-                    likes_analyzed = im_row[2]
-                    comments_analyzed = im_row[3]
-                    avg_views_raw = im_row[4]
-                    med_views_raw = im_row[5]
-                    avg_likes_raw = im_row[6]
-                    med_likes_raw = im_row[7]
-                    avg_comm_raw = im_row[8]
-                    med_comm_raw = im_row[9]
-                    eng_rate_raw = im_row[10]
-                    metrics_time = im_row[11]
-            except sqlite3.OperationalError:
-                pass
-        else:
-            try:
-                ym_row = c.execute(
-                    """
-                    SELECT 
-                        videos_analyzed,
-                        views_analyzed,
-                        likes_analyzed,
-                        comments_analyzed,
-                        average_views,
-                        median_views,
-                        average_likes,
-                        median_likes,
-                        average_comments,
-                        median_comments,
-                        engagement_rate,
-                        engagement_eligible_videos,
-                        shorts_ratio,
-                        metrics_calculated_at
-                    FROM youtube_metrics
-                    WHERE creator_id = ?
-                    ORDER BY metrics_calculated_at DESC
-                    LIMIT 1
-                    """,
-                    (cid,),
-                ).fetchone()
-
-                if ym_row:
-                    posts_analyzed = ym_row[0]
-                    views_analyzed = ym_row[1]
-                    likes_analyzed = ym_row[2]
-                    comments_analyzed = ym_row[3]
-                    avg_views_raw = ym_row[4]
-                    med_views_raw = ym_row[5]
-                    avg_likes_raw = ym_row[6]
-                    med_likes_raw = ym_row[7]
-                    avg_comm_raw = ym_row[8]
-                    med_comm_raw = ym_row[9]
-                    eng_rate_raw = ym_row[10]
-                    engagement_eligible_videos = ym_row[11]
-                    shorts_ratio = ym_row[12]
-                    metrics_time = ym_row[13]
-            except sqlite3.OperationalError:
-                pass
-
-        # Content Format Classification
-        if platform_lower == "instagram":
-            try:
-                media_rows = c.execute(
-                    """
-                    SELECT LOWER(p.media_type), COUNT(*)
-                    FROM posts p
-                    JOIN platform_profiles pp ON p.platform_profile_id = pp.id
-                    WHERE pp.creator_id = ?
-                    GROUP BY LOWER(p.media_type)
-                    """,
-                    (cid,),
-                ).fetchall()
-                media_counts = {row[0]: row[1] for row in media_rows if row[0]}
-            except sqlite3.OperationalError:
-                media_counts = {}
+            media_counts = media_counts_map.get(cid, {})
             fmt_res = classify_instagram_format(media_counts, total_posts=posts_analyzed)
         else:
+            ym_row = yt_metrics_map.get(cid)
+            if ym_row:
+                posts_analyzed = ym_row[1]
+                views_analyzed = ym_row[2]
+                likes_analyzed = ym_row[3]
+                comments_analyzed = ym_row[4]
+                avg_views_raw = ym_row[5]
+                med_views_raw = ym_row[6]
+                avg_likes_raw = ym_row[7]
+                med_likes_raw = ym_row[8]
+                avg_comm_raw = ym_row[9]
+                med_comm_raw = ym_row[10]
+                eng_rate_raw = ym_row[11]
+                engagement_eligible_videos = ym_row[12]
+                shorts_ratio = ym_row[13]
+                metrics_time = ym_row[14]
+
             fmt_res = classify_youtube_format(shorts_ratio, videos_analyzed=posts_analyzed)
 
         followers_val = r["followers"] or 0
@@ -353,7 +319,6 @@ def fetch_creators_table_data():
                 "profile_url": r["profile_url"] or "",
                 "is_relevant": bool(r["is_relevant"]) if r["is_relevant"] is not None else True,
                 "targets_india": bool(r["targets_india"]) if r["targets_india"] is not None else True,
-                # Performance metrics
                 "posts_analyzed": posts_analyzed,
                 "views_analyzed": views_analyzed,
                 "likes_analyzed": likes_analyzed,

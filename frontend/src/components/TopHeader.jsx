@@ -44,11 +44,13 @@ export default function TopHeader({
 
           {showExportMenu && (
             <>
-              <div className="popover-backdrop" onClick={() => setShowExportMenu(false)} />
+              <div className="popover-backdrop popover-backdrop--transparent" onClick={() => setShowExportMenu(false)} />
               <div className="export-menu">
                 <button
+                  type="button"
                   className="export-menu__item"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation()
                     setShowExportMenu(false)
                     onExportCSV()
                   }}
@@ -58,8 +60,10 @@ export default function TopHeader({
                 </button>
                 {onExportExcel && (
                   <button
+                    type="button"
                     className="export-menu__item"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation()
                       setShowExportMenu(false)
                       onExportExcel()
                     }}

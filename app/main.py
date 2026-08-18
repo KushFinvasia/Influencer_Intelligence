@@ -99,15 +99,32 @@ async def view_react_dashboard():
     return HTMLResponse(content="<h1>Dashboard build not found. Run 'npm run build' inside frontend/</h1>", status_code=404)
 
 
+from fastapi import Depends
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.database.session import get_db
+
+_TABLE_CACHE = None
+_CACHE_TIME = 0.0
+
 @app.get("/api/table-data", tags=["Dashboard"])
 async def table_data_json():
-    """JSON API for the React dashboard — returns all creator data."""
+    """Ultra-fast cached JSON endpoint serving complete pre-formatted table rows for dashboard rendering."""
+    global _TABLE_CACHE, _CACHE_TIME
+    import time, asyncio
+    now = time.time()
+    if _TABLE_CACHE is not None and (now - _CACHE_TIME < 60):
+        return _TABLE_CACHE
+
     from scripts.view_creators import fetch_creators_table_data
-    creators = fetch_creators_table_data()
-    return {
+    creators = await asyncio.to_thread(fetch_creators_table_data)
+    result = {
         "creators": creators,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
+    _TABLE_CACHE = result
+    _CACHE_TIME = now
+    return result
 
 
 @app.get("/table", response_class=HTMLResponse, tags=["Dashboard"])

@@ -24,6 +24,9 @@ function getCellValue(creator, columnId) {
     case 'followers':  return creator.followers_raw || 0
     case 'tier':       return tierOrder(creator.bucket)
     case 'format':     return creator.content_format || ''
+    case 'avg_views':    return creator.avg_views_raw || 0
+    case 'avg_likes':    return creator.avg_likes_raw || 0
+    case 'avg_comments': return creator.avg_comments_raw || 0
     case 'engagement': return parseFloat(creator.engagement_rate) || 0
     case 'email':      return creator.email === '-' ? '' : (creator.email || '')
     case 'phone':      return creator.phone === '-' ? '' : (creator.phone || '')

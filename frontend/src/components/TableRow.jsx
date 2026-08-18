@@ -184,6 +184,39 @@ export default function TableRow({
         )
       }
 
+      case 'avg_views': {
+        if (!creator.avg_views || creator.avg_views === '-') {
+          return <span className="cell-muted">—</span>
+        }
+        return (
+          <span className="perf-val-pill" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+            👁 {creator.avg_views}
+          </span>
+        )
+      }
+
+      case 'avg_likes': {
+        if (!creator.avg_likes || creator.avg_likes === '-') {
+          return <span className="cell-muted">—</span>
+        }
+        return (
+          <span className="perf-val-pill" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+            ❤️ {creator.avg_likes}
+          </span>
+        )
+      }
+
+      case 'avg_comments': {
+        if (!creator.avg_comments || creator.avg_comments === '-') {
+          return <span className="cell-muted">—</span>
+        }
+        return (
+          <span className="perf-val-pill" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+            💬 {creator.avg_comments}
+          </span>
+        )
+      }
+
       case 'engagement': {
         const rate = parseFloat(creator.engagement_rate)
         let colorClass = 'eng--low'
@@ -245,7 +278,16 @@ export default function TableRow({
         if (!creator.broker || creator.broker === '-') {
           return <span className="cell-muted">—</span>
         }
-        return <span className="broker-text">{creator.broker}</span>
+        const brokers = creator.broker.split(',').map(b => b.trim()).filter(Boolean)
+        return (
+          <div className="broker-badges-cell" style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+            {brokers.map((b, i) => (
+              <span key={i} className="broker-badge" style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10B981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 7px', borderRadius: '5px', fontSize: '11px', fontWeight: 600 }}>
+                {b}
+              </span>
+            ))}
+          </div>
+        )
       }
 
       case 'social_handles': {

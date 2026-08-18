@@ -3,7 +3,7 @@ import './App.css'
 import { COLUMNS } from './utils/columns'
 import { applyFilters, getFilterOptions } from './utils/filters'
 import { sortCreators } from './utils/sort'
-import { exportCSV } from './utils/export'
+import { exportCSV, exportExcel } from './utils/export'
 import { usePreferences } from './hooks/usePreferences'
 import { useCreatorData } from './hooks/useCreatorData'
 
@@ -174,8 +174,19 @@ export default function App() {
   }
 
   const handleExportCSV = () => {
+    const targetCreators = selectedIds.length > 0
+      ? sortedCreators.filter(c => selectedIds.includes(c.id))
+      : sortedCreators
     const visibleIds = visibleColumns.map(c => c.id)
-    exportCSV(sortedCreators, visibleIds, COLUMNS)
+    exportCSV(targetCreators, visibleIds, COLUMNS)
+  }
+
+  const handleExportExcel = () => {
+    const targetCreators = selectedIds.length > 0
+      ? sortedCreators.filter(c => selectedIds.includes(c.id))
+      : sortedCreators
+    const visibleIds = visibleColumns.map(c => c.id)
+    exportExcel(targetCreators, visibleIds)
   }
 
   const handlePerfClick = (e, creator) => {
@@ -261,6 +272,7 @@ export default function App() {
           onToggleTheme={() => setTheme(prefs.theme === 'dark' ? 'light' : 'dark')}
           onOpenColumnSettings={() => setShowColumnSettings(true)}
           onExportCSV={handleExportCSV}
+          onExportExcel={handleExportExcel}
         />
 
         {/* 5 Metric Summary Cards (dynamically updates with filters) */}

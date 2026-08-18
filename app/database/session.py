@@ -16,6 +16,11 @@ from app.config.settings import get_settings
 settings = get_settings()
 
 db_url = settings.database_url
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql+asyncpg://", 1)
+elif db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
 is_sqlite = "sqlite" in db_url
 
 if is_sqlite and ":///" in db_url and not db_url.startswith("sqlite+aiosqlite:////") and not (len(db_url) > 19 and db_url[18] == ":"):
@@ -81,38 +86,32 @@ async def init_db() -> None:
     """Create all tables on startup. For production, use Alembic migrations."""
     from app.models.database import Base  # noqa: F811
 
-    async with engine.begin() as conn:
+    async with engine.connect() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        await conn.commit()
         
-    # Idempotent migration for new columns
-    if is_sqlite:
-        import sqlite3
-        import logging
-        logger = logging.getLogger(__name__)
-        
-        # We need the absolute path to the database
-        db_path_str = db_url.replace("sqlite+aiosqlite:///", "")
-        try:
-            with sqlite3.connect(db_path_str) as sync_conn:
-                cursor = sync_conn.cursor()
-                
+        # Idempotent migration for new columns
+        if is_sqlite:
+            import logging
+            logger = logging.getLogger(__name__)
+            try:
                 # Check if discovered_via exists in platform_profiles
-                cursor.execute("PRAGMA table_info(platform_profiles)")
-                columns = [col[1] for col in cursor.fetchall()]
+                res = await conn.exec_driver_sql("PRAGMA table_info(platform_profiles)")
+                columns = [row[1] for row in res.fetchall()]
                 if "discovered_via" not in columns:
                     logger.info("Adding discovered_via column to platform_profiles")
-                    cursor.execute("ALTER TABLE platform_profiles ADD COLUMN discovered_via JSON")
+                    await conn.exec_driver_sql("ALTER TABLE platform_profiles ADD COLUMN discovered_via JSON")
+                    await conn.commit()
                     
                 # Check if keyword_metrics exists in scrape_jobs
-                cursor.execute("PRAGMA table_info(scrape_jobs)")
-                columns = [col[1] for col in cursor.fetchall()]
+                res = await conn.exec_driver_sql("PRAGMA table_info(scrape_jobs)")
+                columns = [row[1] for row in res.fetchall()]
                 if "keyword_metrics" not in columns:
                     logger.info("Adding keyword_metrics column to scrape_jobs")
-                    cursor.execute("ALTER TABLE scrape_jobs ADD COLUMN keyword_metrics JSON")
-                    
-                sync_conn.commit()
-        except Exception as e:
-            logger.error(f"Error during schema migration: {e}")
+                    await conn.exec_driver_sql("ALTER TABLE scrape_jobs ADD COLUMN keyword_metrics JSON")
+                    await conn.commit()
+            except Exception as e:
+                logger.error(f"Error during schema migration: {e}")
 
 
 async def close_db() -> None:

@@ -16,7 +16,13 @@ function loadPrefs() {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
       const parsed = JSON.parse(stored)
-      return { ...DEFAULTS, ...parsed }
+      const currentIds = COLUMNS.map(c => c.id)
+      const mergedOrder = [
+        ...(parsed.columnOrder || []).filter(id => currentIds.includes(id)),
+        ...currentIds.filter(id => !(parsed.columnOrder || []).includes(id)),
+      ]
+      const validHidden = (parsed.hiddenColumns || []).filter(id => DEFAULT_HIDDEN.includes(id))
+      return { ...DEFAULTS, ...parsed, columnOrder: mergedOrder, hiddenColumns: validHidden }
     }
   } catch { /* ignore */ }
   return { ...DEFAULTS }
