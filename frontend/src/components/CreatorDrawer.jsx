@@ -1,6 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function CreatorDrawer({ creator, onClose }) {
+  const [isComposingEmail, setIsComposingEmail] = useState(false)
+  const [emailSubject, setEmailSubject] = useState('')
+  const [emailMessage, setEmailMessage] = useState('')
+  const [emailStatus, setEmailStatus] = useState('idle') // idle, loading, confirm, success, error
+  const [emailErrorMsg, setEmailErrorMsg] = useState('')
+
+  useEffect(() => {
+    if (!creator) {
+      setIsComposingEmail(false)
+      setEmailStatus('idle')
+      setEmailSubject('')
+      setEmailMessage('')
+      setEmailErrorMsg('')
+    }
+  }, [creator])
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose()
@@ -8,6 +24,24 @@ export default function CreatorDrawer({ creator, onClose }) {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
+
+  const handleSendEmail = async () => {
+    setEmailStatus('loading')
+    setEmailErrorMsg('')
+    try {
+      const res = await fetch(`/api/creators/${creator.id}/email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject: emailSubject, message: emailMessage })
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.detail || 'Failed to send email')
+      setEmailStatus('success')
+    } catch (err) {
+      setEmailStatus('error')
+      setEmailErrorMsg(err.message)
+    }
+  }
 
   if (!creator) return null
 
@@ -141,9 +175,17 @@ export default function CreatorDrawer({ creator, onClose }) {
             <div className="drawer__section-title">Contact Information</div>
             <div className="drawer__row">
               <span className="drawer__label">Email</span>
-              <span className="drawer__value">
+              <span className="drawer__value" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {creator.email && creator.email !== '-' ? (
-                  <a href={`mailto:${creator.email}`}>{creator.email}</a>
+                  <>
+                    <a href={`mailto:${creator.email}`}>{creator.email}</a>
+                    <button 
+                      className="btn-sm" 
+                      onClick={() => { setIsComposingEmail(true); setEmailStatus('idle'); }}
+                    >
+                      ✉ Send Email
+                    </button>
+                  </>
                 ) : (
                   <span className="cell-muted">-</span>
                 )}
@@ -228,6 +270,79 @@ export default function CreatorDrawer({ creator, onClose }) {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {/* Email Composer */}
+          {isComposingEmail && (
+            <div className="email-composer">
+              <div className="email-composer__header">
+                <strong>Compose Email to {creator.name}</strong>
+                <button className="email-composer__close" onClick={() => setIsComposingEmail(false)}>✕</button>
+              </div>
+              <div className="email-composer__body">
+                <div className="drawer__row" style={{ marginBottom: '12px' }}>
+                  <span className="drawer__label">To:</span>
+                  <span className="drawer__value">{creator.email}</span>
+                </div>
+                <div className="email-composer__field">
+                  <input 
+                    type="text" 
+                    placeholder="Subject" 
+                    value={emailSubject}
+                    onChange={(e) => setEmailSubject(e.target.value)}
+                    disabled={emailStatus === 'loading' || emailStatus === 'success'}
+                  />
+                </div>
+                <div className="email-composer__field">
+                  <textarea 
+                    placeholder="Message..." 
+                    rows={5}
+                    value={emailMessage}
+                    onChange={(e) => setEmailMessage(e.target.value)}
+                    disabled={emailStatus === 'loading' || emailStatus === 'success'}
+                  />
+                </div>
+
+                {emailStatus === 'error' && (
+                  <div className="email-composer__error">
+                    {emailErrorMsg}
+                  </div>
+                )}
+                {emailStatus === 'success' && (
+                  <div className="email-composer__success">
+                    Email sent successfully!
+                  </div>
+                )}
+
+                {(emailStatus === 'idle' || emailStatus === 'error') && (
+                  <div className="email-composer__actions">
+                    <button 
+                      className="btn-primary" 
+                      disabled={!emailSubject || !emailMessage}
+                      onClick={() => setEmailStatus('confirm')}
+                    >
+                      Review & Send
+                    </button>
+                  </div>
+                )}
+
+                {emailStatus === 'confirm' && (
+                  <div className="email-composer__confirm">
+                    <p>Are you sure you want to send this email to <strong>{creator.email}</strong>?</p>
+                    <div className="email-composer__actions">
+                      <button className="btn-secondary" onClick={() => setEmailStatus('idle')}>Cancel</button>
+                      <button className="btn-primary" onClick={handleSendEmail}>Confirm Send</button>
+                    </div>
+                  </div>
+                )}
+
+                {emailStatus === 'loading' && (
+                  <div className="email-composer__loading">
+                    Sending...
+                  </div>
+                )}
               </div>
             </div>
           )}
