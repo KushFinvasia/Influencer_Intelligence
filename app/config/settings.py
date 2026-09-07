@@ -14,6 +14,8 @@ from pydantic import Field
 logger = logging.getLogger(__name__)
 
 CONFIG_DIR = Path(__file__).parent
+PROJECT_ROOT = CONFIG_DIR.parent.parent
+ENV_FILE = PROJECT_ROOT / ".env"
 
 
 class Settings(BaseSettings):
@@ -21,7 +23,6 @@ class Settings(BaseSettings):
 
     # Database
     database_url: str = Field(
-        default="postgresql+asyncpg://user:password@localhost:5432/creator_intel",
         alias="DATABASE_URL",
     )
 
@@ -81,7 +82,7 @@ class Settings(BaseSettings):
     smtp_timeout: int = Field(default=10, alias="SMTP_TIMEOUT")
 
     model_config = {
-        "env_file": ".env",
+        "env_file": str(ENV_FILE),
         "env_file_encoding": "utf-8",
         "extra": "ignore",
     }

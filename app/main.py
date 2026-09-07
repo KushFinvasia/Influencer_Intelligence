@@ -102,7 +102,7 @@ async def view_react_dashboard():
 from fastapi import Depends
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.database.session import get_db
+from app.database.session import engine, get_db
 
 _TABLE_CACHE = None
 _CACHE_TIME = 0.0
@@ -116,8 +116,78 @@ async def table_data_json():
     if _TABLE_CACHE is not None and (now - _CACHE_TIME < 60):
         return _TABLE_CACHE
 
-    from scripts.view_creators import fetch_creators_table_data
-    creators = await asyncio.to_thread(fetch_creators_table_data)
+    async with engine.connect() as conn:
+        rows = (await conn.execute(text("""
+            SELECT c.id, c.name, c.email, c.phone, c.website,
+                   c.primary_category, c.primary_language, c.influencer_score,
+                   c.audience_bucket, p.platform, p.followers, p.profile_url,
+                   COALESCE(b.brokers, '') AS brokers,
+                   COALESCE(sl.socials, '[]'::json) AS socials
+            FROM creators c
+            LEFT JOIN platform_profiles p ON p.creator_id = c.id
+            LEFT JOIN (
+                SELECT creator_id, string_agg(DISTINCT broker_name, ', ') AS brokers
+                FROM broker_associations
+                GROUP BY creator_id
+            ) b ON b.creator_id = c.id
+            LEFT JOIN (
+                SELECT creator_id,
+                       json_agg(json_build_object(
+                           'platform', platform, 'url', COALESCE(url, value)
+                       )) AS socials
+                FROM social_links
+                GROUP BY creator_id
+            ) sl ON sl.creator_id = c.id
+            ORDER BY c.influencer_score DESC NULLS LAST,
+                     p.followers DESC NULLS LAST, c.id
+        """))).mappings().all()
+
+    def format_followers(value):
+        value = value or 0
+        if value >= 1_000_000:
+            return f"{value / 1_000_000:.1f}M"
+        if value >= 1_000:
+            return f"{value / 1_000:.1f}K"
+        return str(value)
+
+    def bucket(value):
+        value = value or 0
+        if value >= 1_000_000:
+            return "1M+"
+        if value >= 300_000:
+            return "300K–1M"
+        if value >= 10_000:
+            return "10K–300K"
+        return "< 10K"
+
+    creators = []
+    for row in rows:
+        followers = row["followers"] or 0
+        creators.append({
+            "id": row["id"],
+            "platform": (row["platform"] or "YouTube").capitalize(),
+            "name": (row["name"] or "N/A").strip(),
+            "followers_raw": followers,
+            "followers": format_followers(followers),
+            "bucket": bucket(followers),
+            "content_format": "-",
+            "format_label": "-",
+            "format_filter": "",
+            "format_breakdown": "",
+            "email": row["email"] or "-",
+            "phone": row["phone"] or "-",
+            "category": row["primary_category"] or "-",
+            "language": row["primary_language"] or "-",
+            "broker": row["brokers"] or "-",
+            "website": row["website"] or "-",
+            "social_handles": "",
+            "structured_socials": row["socials"],
+            "score": f"{row['influencer_score']:.1f}" if row["influencer_score"] is not None else "0.0",
+            "profile_url": row["profile_url"] or "",
+            "is_relevant": True,
+            "targets_india": True,
+            "posts_analyzed": 0,
+        })
     result = {
         "creators": creators,
         "generated_at": datetime.now(timezone.utc).isoformat(),
