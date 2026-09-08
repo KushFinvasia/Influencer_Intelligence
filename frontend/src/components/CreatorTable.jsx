@@ -17,6 +17,7 @@ export default function CreatorTable({
   selectedIds,
   onToggleSelectAll,
   onToggleCheck,
+  startIndex = 0,
 }) {
   const allSelected = creators.length > 0 && creators.every(c => selectedIds.includes(c.id))
 
@@ -35,7 +36,7 @@ export default function CreatorTable({
             onToggleSelectAll={onToggleSelectAll}
           />
           <tbody>
-            {creators.map(creator => (
+            {creators.map((creator, index) => (
               <TableRow
                 key={`${creator.id}-${creator.platform}`}
                 creator={creator}
@@ -45,6 +46,7 @@ export default function CreatorTable({
                 onToggleCheck={onToggleCheck}
                 onSelect={onSelectCreator}
                 onPerfClick={onPerfClick}
+                sno={startIndex + index + 1}
               />
             ))}
           </tbody>

@@ -337,6 +337,7 @@ export default function App() {
               selectedIds={selectedIds}
               onToggleSelectAll={handleToggleSelectAll}
               onToggleCheck={handleToggleCheck}
+              startIndex={(currentPage - 1) * prefs.pageSize}
             />
 
             {/* Pagination Controls */}
@@ -349,38 +350,38 @@ export default function App() {
             />
           </>
         )}
+
+        {/* Column Settings Modal */}
+        {showColumnSettings && (
+          <ColumnsMenu
+            columns={COLUMNS}
+            columnOrder={prefs.columnOrder}
+            hiddenColumns={prefs.hiddenColumns}
+            onToggleColumn={toggleColumn}
+            onReorderColumns={setColumnOrder}
+            onResetColumns={resetColumns}
+            onClose={() => setShowColumnSettings(false)}
+          />
+        )}
+
+        {/* Creator Detail Drawer */}
+        {selectedCreator && (
+          <CreatorDrawer
+            creator={selectedCreator}
+            onClose={() => setSelectedCreator(null)}
+          />
+        )}
+
+        {/* Performance Metric Breakdown Popover */}
+        {perfPopover && (
+          <PerfPopover
+            data={perfPopover.data}
+            position={perfPopover.position}
+            onClose={() => setPerfPopover(null)}
+          />
+        )}
         </div>
       </main>
-
-      {/* Column Settings Modal */}
-      {showColumnSettings && (
-        <ColumnsMenu
-          columns={COLUMNS}
-          columnOrder={prefs.columnOrder}
-          hiddenColumns={prefs.hiddenColumns}
-          onToggleColumn={toggleColumn}
-          onReorderColumns={setColumnOrder}
-          onResetColumns={resetColumns}
-          onClose={() => setShowColumnSettings(false)}
-        />
-      )}
-
-      {/* Creator Detail Drawer */}
-      {selectedCreator && (
-        <CreatorDrawer
-          creator={selectedCreator}
-          onClose={() => setSelectedCreator(null)}
-        />
-      )}
-
-      {/* Performance Metric Breakdown Popover */}
-      {perfPopover && (
-        <PerfPopover
-          data={perfPopover.data}
-          position={perfPopover.position}
-          onClose={() => setPerfPopover(null)}
-        />
-      )}
     </div>
   )
 }

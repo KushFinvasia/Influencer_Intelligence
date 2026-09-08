@@ -75,6 +75,7 @@ export default function TableRow({
   onToggleCheck,
   onSelect,
   onPerfClick,
+  sno,
 }) {
   const [gradStart, gradEnd] = getAvatarColors(creator.name)
   const initials = getInitials(creator.name)
@@ -86,6 +87,10 @@ export default function TableRow({
 
   const renderCell = (colId) => {
     switch (colId) {
+      case 'sno': {
+        return <span className="sno-cell" style={{ color: 'var(--text-muted)' }}>{sno}</span>
+      }
+
       case 'platform': {
         return (
           <div className="table-platform-icon" title={creator.platform || 'YouTube'}>

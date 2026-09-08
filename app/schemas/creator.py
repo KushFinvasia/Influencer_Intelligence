@@ -248,6 +248,14 @@ class CreatorSummaryResponse(BaseModel):
     platforms: list[str] = Field(default_factory=list)
     followers: int | None = None  # Max across platforms
     created_at: datetime | None = None
+    avg_views: float | None = None
+    avg_likes: float | None = None
+    avg_comments: float | None = None
+    engagement_rate: float | None = None
+    content_format: str | None = None
+    social_handles: str | None = None
+    broker: str | None = None
+    profile_url: str | None = None
 
 
 class CreatorDetailResponse(BaseModel):

@@ -52,6 +52,9 @@ def creators_to_csv(creators: list[dict]) -> str:
         "status", "audience_bucket", "creator_type",
         "primary_language", "primary_category",
         "influencer_score", "platforms", "followers",
+        "avg_views", "avg_likes", "avg_comments", 
+        "engagement_rate", "content_format", 
+        "social_handles", "broker", "profile_url",
     ]
 
     writer = csv.DictWriter(

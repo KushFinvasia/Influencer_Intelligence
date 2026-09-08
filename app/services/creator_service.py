@@ -629,7 +629,13 @@ class CreatorService:
 
         result = await self.db.execute(
             select(Creator)
-            .options(selectinload(Creator.platform_profiles))
+            .options(
+                selectinload(Creator.platform_profiles),
+                selectinload(Creator.broker_associations),
+                selectinload(Creator.social_links),
+                selectinload(Creator.instagram_metrics),
+                selectinload(Creator.youtube_metrics),
+            )
             .order_by(Creator.influencer_score.desc().nullslast())
             .offset((page - 1) * page_size)
             .limit(page_size)
@@ -649,7 +655,11 @@ class CreatorService:
     ) -> SearchResponse:
         """Search creators with comprehensive filters."""
         query = select(Creator).options(
-            selectinload(Creator.platform_profiles)
+            selectinload(Creator.platform_profiles),
+            selectinload(Creator.broker_associations),
+            selectinload(Creator.social_links),
+            selectinload(Creator.instagram_metrics),
+            selectinload(Creator.youtube_metrics),
         )
 
         conditions = []
@@ -924,6 +934,43 @@ class CreatorService:
             (pp.followers or 0 for pp in (creator.platform_profiles or [])),
             default=None,
         )
+
+        avg_views = None
+        avg_likes = None
+        avg_comments = None
+        engagement_rate = None
+        content_format = None
+
+        if "youtube" in platforms and creator.youtube_metrics:
+            latest = sorted(creator.youtube_metrics, key=lambda x: x.metrics_calculated_at, reverse=True)[0]
+            avg_views = latest.average_views
+            avg_likes = latest.average_likes
+            avg_comments = latest.average_comments
+            engagement_rate = latest.engagement_rate
+            if latest.shorts_ratio is not None:
+                if latest.shorts_ratio > 0.7:
+                    content_format = "shorts"
+                elif latest.shorts_ratio < 0.3:
+                    content_format = "long-form"
+                else:
+                    content_format = "hybrid"
+        elif "instagram" in platforms and creator.instagram_metrics:
+            latest = sorted(creator.instagram_metrics, key=lambda x: x.metrics_calculated_at, reverse=True)[0]
+            avg_views = latest.average_views
+            avg_likes = latest.average_likes
+            avg_comments = latest.average_comments
+            engagement_rate = latest.engagement_rate
+            content_format = "posts/reels"
+
+        social_handles = ", ".join([sl.value for sl in (creator.social_links or []) if sl.value])
+        broker = ", ".join([ba.broker_name for ba in (creator.broker_associations or [])])
+        profile_url = None
+        if creator.platform_profiles:
+            for pp in creator.platform_profiles:
+                if pp.profile_url:
+                    profile_url = pp.profile_url
+                    break
+
         return CreatorSummaryResponse(
             id=creator.id,
             name=creator.name,
@@ -938,6 +985,14 @@ class CreatorService:
             platforms=platforms,
             followers=max_followers,
             created_at=creator.created_at,
+            avg_views=avg_views,
+            avg_likes=avg_likes,
+            avg_comments=avg_comments,
+            engagement_rate=engagement_rate,
+            content_format=content_format,
+            social_handles=social_handles if social_handles else None,
+            broker=broker if broker else None,
+            profile_url=profile_url,
         )
 
     def _to_detail_response(self, creator: Creator) -> CreatorDetailResponse:

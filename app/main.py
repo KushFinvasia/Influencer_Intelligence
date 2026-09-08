@@ -122,7 +122,17 @@ async def table_data_json():
                    c.primary_category, c.primary_language, c.influencer_score,
                    c.audience_bucket, p.platform, p.followers, p.profile_url,
                    COALESCE(b.brokers, '') AS brokers,
-                   COALESCE(sl.socials, '[]'::json) AS socials
+                   COALESCE(sl.socials, '[]'::json) AS socials,
+                   COALESCE(im.average_views, ym.average_views) AS avg_views,
+                   COALESCE(im.average_likes, ym.average_likes) AS avg_likes,
+                   COALESCE(im.average_comments, ym.average_comments) AS avg_comments,
+                   COALESCE(im.engagement_rate, ym.engagement_rate) AS engagement_rate,
+                   CASE 
+                       WHEN p.platform = 'youtube' AND ym.shorts_ratio > 0.5 THEN 'Short-form'
+                       WHEN p.platform = 'youtube' THEN 'Long-form'
+                       WHEN p.platform = 'instagram' THEN 'Short-form'
+                       ELSE '-'
+                   END AS content_format
             FROM creators c
             LEFT JOIN platform_profiles p ON p.creator_id = c.id
             LEFT JOIN (
@@ -138,6 +148,16 @@ async def table_data_json():
                 FROM social_links
                 GROUP BY creator_id
             ) sl ON sl.creator_id = c.id
+            LEFT JOIN (
+                SELECT DISTINCT ON (creator_id) creator_id, average_views, average_likes, average_comments, engagement_rate
+                FROM instagram_metrics
+                ORDER BY creator_id, id DESC
+            ) im ON im.creator_id = c.id AND p.platform = 'instagram'
+            LEFT JOIN (
+                SELECT DISTINCT ON (creator_id) creator_id, average_views, average_likes, average_comments, engagement_rate, shorts_ratio
+                FROM youtube_metrics
+                ORDER BY creator_id, id DESC
+            ) ym ON ym.creator_id = c.id AND p.platform = 'youtube'
             ORDER BY c.influencer_score DESC NULLS LAST,
                      p.followers DESC NULLS LAST, c.id
         """))).mappings().all()
@@ -163,6 +183,11 @@ async def table_data_json():
     creators = []
     for row in rows:
         followers = row["followers"] or 0
+        socials_list = row["socials"] if isinstance(row["socials"], list) else []
+        social_handles = ", ".join(
+            [f"{s.get('platform', '')}: {s.get('url', '')}" for s in socials_list]
+        )
+
         creators.append({
             "id": row["id"],
             "platform": (row["platform"] or "YouTube").capitalize(),
@@ -170,9 +195,9 @@ async def table_data_json():
             "followers_raw": followers,
             "followers": format_followers(followers),
             "bucket": bucket(followers),
-            "content_format": "-",
-            "format_label": "-",
-            "format_filter": "",
+            "content_format": row.get("content_format", "-"),
+            "format_label": row.get("content_format", "-"),
+            "format_filter": "shortform" if "Short" in str(row.get("content_format", "")) else "longform",
             "format_breakdown": "",
             "email": row["email"] or "-",
             "phone": row["phone"] or "-",
@@ -180,13 +205,17 @@ async def table_data_json():
             "language": row["primary_language"] or "-",
             "broker": row["brokers"] or "-",
             "website": row["website"] or "-",
-            "social_handles": "",
+            "social_handles": social_handles,
             "structured_socials": row["socials"],
             "score": f"{row['influencer_score']:.1f}" if row["influencer_score"] is not None else "0.0",
             "profile_url": row["profile_url"] or "",
             "is_relevant": True,
             "targets_india": True,
             "posts_analyzed": 0,
+            "avg_views": round(row["avg_views"], 1) if row["avg_views"] is not None else None,
+            "avg_likes": round(row["avg_likes"], 1) if row["avg_likes"] is not None else None,
+            "avg_comments": round(row["avg_comments"], 1) if row["avg_comments"] is not None else None,
+            "engagement_rate": round(row["engagement_rate"], 1) if row["engagement_rate"] is not None else None,
         })
     result = {
         "creators": creators,

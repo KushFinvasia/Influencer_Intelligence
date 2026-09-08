@@ -1,6 +1,7 @@
 /** Column definitions matching the FinIntel Platform table design. */
 
 export const COLUMNS = [
+  { id: 'sno',         label: 'S.No',        sortable: false, defaultVisible: true },
   { id: 'platform',    label: 'Platform',    sortable: true,  defaultVisible: true },
   { id: 'name',        label: 'Creator',     sortable: true,  defaultVisible: true },
   { id: 'followers',   label: 'Followers',   sortable: true,  defaultVisible: true },
