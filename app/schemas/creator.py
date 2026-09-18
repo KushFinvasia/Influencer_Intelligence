@@ -307,3 +307,22 @@ class RelationshipResponse(BaseModel):
     relationship_type: str
     evidence_url: str | None = None
     discovered_at: datetime | None = None
+
+
+class SimilarCreatorResponse(BaseModel):
+    """A single peer creator returned by the similarity service."""
+    id: int
+    name: str
+    platforms: list[str] = Field(default_factory=list)
+    followers: int | None = None  # Max across platforms
+    category: str | None = None
+    language: str | None = None
+    similarity_score: float
+    match_reasons: list[str] = Field(default_factory=list)
+
+
+class SimilarCreatorsResponse(BaseModel):
+    """Ranked peers for a given creator."""
+    creator_id: int
+    count: int
+    results: list[SimilarCreatorResponse] = Field(default_factory=list)

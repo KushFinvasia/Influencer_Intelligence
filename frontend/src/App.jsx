@@ -62,6 +62,8 @@ export default function App() {
 
   // Modal / Drawer / Popover state
   const [selectedCreator, setSelectedCreator] = useState(null)
+  // Creators visited before the current one, so the modal can go back.
+  const [creatorTrail, setCreatorTrail] = useState([])
   const [showColumnSettings, setShowColumnSettings] = useState(false)
   const [perfPopover, setPerfPopover] = useState(null)
 
@@ -332,7 +334,10 @@ export default function App() {
               onReorderColumns={setColumnOrder}
               density={prefs.density}
               selectedCreator={selectedCreator}
-              onSelectCreator={setSelectedCreator}
+              onSelectCreator={(c) => {
+                setCreatorTrail([])
+                setSelectedCreator(c)
+              }}
               onPerfClick={handlePerfClick}
               selectedIds={selectedIds}
               onToggleSelectAll={handleToggleSelectAll}
@@ -368,7 +373,22 @@ export default function App() {
         {selectedCreator && (
           <CreatorDrawer
             creator={selectedCreator}
-            onClose={() => setSelectedCreator(null)}
+            onClose={() => {
+              setSelectedCreator(null)
+              setCreatorTrail([])
+            }}
+            onOpenCreator={(id) => {
+              const target = creators.find(c => c.id === id)
+              if (!target) return
+              setCreatorTrail(prev => [...prev, selectedCreator])
+              setSelectedCreator(target)
+            }}
+            canGoBack={creatorTrail.length > 0}
+            onBack={() => {
+              if (creatorTrail.length === 0) return
+              setSelectedCreator(creatorTrail[creatorTrail.length - 1])
+              setCreatorTrail(prev => prev.slice(0, -1))
+            }}
           />
         )}
 

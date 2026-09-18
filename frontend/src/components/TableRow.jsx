@@ -1,4 +1,5 @@
 import React from 'react'
+import SocialIconLinks from './SocialIcons'
 
 // Color palettes for initials avatars
 const AVATAR_COLORS = [
@@ -296,19 +297,7 @@ export default function TableRow({
       }
 
       case 'social_handles': {
-        if (!creator.social_handles || creator.social_handles === '-') {
-          return <span className="cell-muted">—</span>
-        }
-        const handles = creator.social_handles.split(',').map(s => s.trim()).filter(Boolean)
-        return (
-          <div className="socials-cell" style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-            {handles.map((h, i) => (
-              <span key={i} className="social-badge" style={{ backgroundColor: 'var(--bg-hover)', padding: '2px 6px', borderRadius: '4px', fontSize: '11px', color: 'var(--text-secondary)' }}>
-                {h}
-              </span>
-            ))}
-          </div>
-        )
+        return <SocialIconLinks creator={creator} />
       }
 
       case 'website': {

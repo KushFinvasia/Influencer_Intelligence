@@ -48,5 +48,35 @@
     "Stock Market News": "Market News",
     "Market Commentary": "Market News",
     "Market Analysis": "Market News"
+  },
+  "groups": {
+    "Trading": [
+      "Swing Trading",
+      "Intraday",
+      "Technical Analysis",
+      "F&O",
+      "Algo Trading"
+    ],
+    "Investing": [
+      "Long-term Investing",
+      "Fundamental Analysis",
+      "Mutual Funds"
+    ],
+    "Markets": [
+      "Equity",
+      "IPO",
+      "Market News"
+    ],
+    "Alternative Markets": [
+      "Commodity Trading",
+      "Forex",
+      "Crypto"
+    ],
+    "Wealth & Planning": [
+      "Personal Finance",
+      "Tax Planning",
+      "Insurance",
+      "Real Estate Investing"
+    ]
   }
 }

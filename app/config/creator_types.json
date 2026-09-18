@@ -35,5 +35,24 @@
     "Brand Ambassador": "Broker Representative",
     "Finfluencer": "Influencer",
     "Content Creator": "Influencer"
+  },
+  "groups": {
+    "Market Practitioner": [
+      "Trader",
+      "Investor",
+      "Analyst"
+    ],
+    "Education & Audience": [
+      "Educator",
+      "Influencer",
+      "Community Builder"
+    ],
+    "Advisory & Commercial": [
+      "Personal Finance",
+      "Broker Representative"
+    ],
+    "Media": [
+      "News"
+    ]
   }
 }

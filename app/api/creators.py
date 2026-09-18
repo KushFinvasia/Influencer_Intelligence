@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.session import get_db
@@ -10,9 +10,11 @@ from app.schemas.creator import (
     CreatorDetailResponse,
     CreatorSummaryResponse,
     CreatorUpdateRequest,
+    SimilarCreatorsResponse,
 )
 from app.schemas.search import SearchResponse
 from app.services.creator_service import CreatorService
+from app.services.similarity import SimilarityService
 
 router = APIRouter(prefix="/api/creators", tags=["Creators"])
 
@@ -39,6 +41,20 @@ async def get_creator(
     if not creator:
         raise HTTPException(status_code=404, detail="Creator not found")
     return creator
+
+
+@router.get("/{creator_id}/similar", response_model=SimilarCreatorsResponse)
+async def get_similar_creators(
+    creator_id: int,
+    limit: int = Query(10, ge=1, le=50),
+    db: AsyncSession = Depends(get_db),
+):
+    """Find creators comparable to this one, ranked by similarity score."""
+    service = SimilarityService(db)
+    similar = await service.find_similar(creator_id, limit)
+    if similar is None:
+        raise HTTPException(status_code=404, detail="Creator not found")
+    return similar
 
 
 @router.put("/{creator_id}")

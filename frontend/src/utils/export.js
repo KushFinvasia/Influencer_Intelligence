@@ -1,13 +1,33 @@
 /** Export utilities for CSV and styled Excel downloads. */
 
+/**
+ * Hand a blob to the browser as a file download.
+ *
+ * The anchor is attached to the document before clicking (a detached anchor is
+ * ignored by some browsers) and the object URL is revoked on a later tick —
+ * revoking synchronously invalidates the URL immediately and can abort the
+ * download before the browser has finished reading the blob.
+ */
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.style.display = 'none'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 export function exportCSV(creators, visibleColumns, allColumns) {
   const cols = visibleColumns
     .map(id => allColumns.find(c => c.id === id))
     .filter(Boolean)
 
   const headers = cols.map(c => c.label)
-  const rows = creators.map(creator =>
-    cols.map(col => csvCellValue(creator, col.id))
+  const rows = creators.map((creator, index) =>
+    cols.map(col => csvCellValue(creator, col.id, index))
   )
 
   const csv = [headers, ...rows]
@@ -15,12 +35,7 @@ export function exportCSV(creators, visibleColumns, allColumns) {
   .join('\n')
 
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = `creators_export_${new Date().toISOString().slice(0, 10)}.csv`
-  a.click()
-  URL.revokeObjectURL(url)
+  triggerDownload(blob, `creators_export_${new Date().toISOString().slice(0, 10)}.csv`)
 }
 
 export async function exportExcel(creators, visibleColumns) {
@@ -41,24 +56,23 @@ export async function exportExcel(creators, visibleColumns) {
     }
 
     const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `creators_export_${new Date().toISOString().slice(0, 10)}.xlsx`
-    a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(blob, `creators_export_${new Date().toISOString().slice(0, 10)}.xlsx`)
   } catch (err) {
     console.error('Excel Export Error:', err)
     alert(`Could not download Excel file: ${err.message}`)
   }
 }
 
-function csvCellValue(creator, columnId) {
+function csvCellValue(creator, columnId, index = 0) {
   switch (columnId) {
+    case 'sno':         return index + 1
     case 'platform':    return creator.platform || ''
     case 'name':        return creator.name || ''
     case 'followers':   return creator.followers || ''
     case 'tier':        return creator.bucket || ''
+    case 'format':      return creator.format_label || creator.content_format || ''
+    case 'social_handles': return creator.social_handles === '-' ? '' : (creator.social_handles || '')
+    case 'website':     return creator.website === '-' ? '' : (creator.website || '')
     case 'avg_views':   return creator.avg_views === '-' ? '' : (creator.avg_views || '')
     case 'avg_likes':   return creator.avg_likes === '-' ? '' : (creator.avg_likes || '')
     case 'avg_comments': return creator.avg_comments === '-' ? '' : (creator.avg_comments || '')

@@ -127,9 +127,19 @@ def _extract_cell_value(creator: dict, col_id: str) -> tuple[any, str | None]:
         if comments != "-": parts.append(f"Comments: {comments}")
         return " | ".join(parts) if parts else "-", None
     elif col_id == "engagement":
-        raw = creator.get("engagement_rate") or creator.get("engagement")
+        raw = creator.get("engagement_rate")
+        if raw is None:
+            raw = creator.get("engagement")
         num = _parse_numeric(raw)
-        return num, "0.00%" if isinstance(num, (int, float)) else None
+        if isinstance(num, (int, float)):
+            # Excel's 0.00% format multiplies the stored number by 100 on
+            # display. A "5.2%" string is already a fraction by this point,
+            # but a bare number is a percentage (metrics are computed as
+            # ratio * 100), so scale it back to a fraction first.
+            if not (isinstance(raw, str) and raw.strip().endswith("%")):
+                num = num / 100.0
+            return num, "0.00%"
+        return num, None
     elif col_id == "email":
         e = creator.get("email", "")
         return "" if e == "-" else e, None
